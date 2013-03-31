@@ -5,7 +5,7 @@ var application_root = __dirname,
     serverPort = 3000;
 
 // EXPRESS
-var app = express();
+var app = express.createServer();
 app.configure(function () {  
   app.use(express.methodOverride());
   app.use(express.bodyParser());
