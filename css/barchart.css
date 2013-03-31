@@ -1,0 +1,36 @@
+#map-legend {
+  font-size: 0.7em;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.y.axis path {
+  display: none;
+}
+
+rect {
+  fill: #993341;
+}
+
+.brush .extent {
+  stroke: #fff;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+
+.d3-vec { position:absolute; }
+circle {
+  fill: #993341;
+  fill-opacity: .2;
+  stroke: #fff;
+  stroke-width: 1.5px;
+}

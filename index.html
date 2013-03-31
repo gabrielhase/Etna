@@ -1,0 +1,69 @@
+<!Doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/mapbox.css">
+    <link rel="stylesheet" href="css/map.css">
+    <link rel="stylesheet" href="css/barchart.css">
+
+    <script src="js/vendor/d3.v3.js"></script>
+    <script src="js/vendor/jquery-1.9.1.js"></script>
+    <script src="js/vendor/mapbox.js"></script>
+    <!-- Templating -->
+    <script src="js/vendor/underscore.js"></script>
+
+    <script src="js/templates.js"></script>
+    <script src="js/eruptions.js"></script>
+    <script src="js/d3layer.js"></script>
+    <script src="js/map.js"></script>
+  </head>
+
+  <body>
+    <h1 id="title">Under the pine trees of Mt. Etna</h1>
+    <div id="map-container">
+      <div id='map'>
+      </div>
+
+      <div id="map-regions">
+        <div class="corner">
+          <a href="" class="region-link image-link" data-region="map">
+            <img src="img/volcano_icon.png" alt="Region Etna" width="47" style="border-bottom: 1px solid #eee" />
+            <span style="position:absolute; top: 15px; right: 10px;">Eruptions</span>
+          </a>
+        </div>
+
+        <div class="content" id="towns-navigation">   
+        </div>
+      </div>
+
+      <div id="map-legend" class="transparent">
+        <h3>Eruptions at Mt. Etna</h3> 
+        <p>Use the mouse to select the eruption interval you're interested in or click on a town in the top-left navigation to get details about the towns around Mt. Etna.</p>
+        <a class="close-map-legend legend-close-link" href="">x</a>
+      </div>
+      <div id="map-legend-teaser" style="display:none">
+        <a href="" class="open-map-legend">All volcano eruptions</a>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready( function() {
+        d3.json('data/towns.json', function(error, towns) {
+          if (error) {
+            console.log(error);
+          }
+          // init the towns navigation
+          $("#towns-navigation").html(etna.templates.townsNavigation(towns));
+          d3.json('data/etna-history.json', function(error, eruptions) {
+            if (error) {
+              console.log(error);
+            }
+            // init the map
+            etna.map.init(towns, eruptions);
+            $("#title").fadeOut({'duration': 6000, 'easing': 'swing'}); 
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

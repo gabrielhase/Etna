@@ -1,0 +1,75 @@
+{
+  "towns": {    
+    "catania": {
+      "location":  { "lat": 37.5080,  "lon": 15.0829 },
+      "name": "Catania",
+      "text": "Catania is is an Italian city on the east coast of Sicily facing the Ionian Sea, between Messina and Syracuse. It is the capital of the homonymous province, and is the second-largest city in Sicily and the tenth in Italy.Catania is known for its seismic history, having been destroyed by a catastrophic earthquake in 1169, another in 1693, and several volcanic eruptions from the neighboring Mount Etna volcano, the most violent of which was in 1669.",
+      "imageurl": "img/towns/catania.jpg",
+      "population": "292'044"
+    },
+    "randazzo": {
+      "location": { "lat": 37.883333, "lon": 14.95},
+      "name": "Randazzo",
+      "text": "Randazzo (Sicilian: Rannazzu) is a town and comune of Sicily, Italy, in the province of Catania. It is situated at the northern foot of Mount Etna, 70 km NW of Catania by rail. It is the nearest town to the summit of Etna, and is one of the points from which the ascent may be made. An eruption in 1981 had lava flows coming narrowly close to the town.",
+      "imageurl": "img/towns/randazzo.jpg",
+      "population": "11'000"
+    },
+    "mascali": {
+      "location": { "lat": 37.7605, "lon": 15.161},
+      "name": "Mascali",
+      "text": "Mascali was destroyed in 1928 by a lava flow running down Etnas east flank. The event was used by Benito Mussolini's Fascist regime for propaganda purposes, with the evacuation, aid, and rebuilding operations being presented as models of fascist planning. Mascali was rebuilt on a new site, and its church contains the Italian fascist symbol of the torch, placed above the statue of Jesus Christ. Today Mascalis inhabitants work mostly in agriculture or the paper industry.",
+      "imageurl": "img/towns/mascali.jpg",
+      "population": "13'983"
+    },
+    "acireale": {
+      "location": { "lat": 37.6258, "lon": 15.161},
+      "name": "Acireale",
+      "text": "The town grew during the 15th century with imigrants from the larger regions since the location of the town provided natural safety against pirates. In 1030 AD an unrecorded eruption from Etna had Lava flow into the sea just north of Acireale. Today the inhabitants work mainly in tourism and quarrying.",
+      "imageurl": "img/towns/acrireale.jpg",
+      "population": "53'230"
+    },
+    "zafferana": {
+      "location": { "lat": 37.7104, "lon": 15.0674},
+      "name": "Zafferana",
+      "text": "This town was destroyed by eruptions of Etna several times.  The 1991–1993 eruption saw the town of Zafferana threatened by a lava flow, but successful diversion efforts saved the town with the loss of only one building a few hundred metres from the town's margin.",
+      "imageurl": "img/towns/zafferana.jpg",
+      "population": "9'435"
+    },
+    "bronte": {
+      "location": { "lat": 37.7884, "lon": 14.8307},
+      "name": "Bronte",
+      "text": "In the middle-ages Bronte was divided in 24 smaller villages belonging ot the monastery of Maniace. Karl V. united the villages to the city Bronte in 1520. Bronte was destroyed by eruptions of Mt. Etna in 1651, 1832, and 1843.",
+      "imageurl": "img/towns/bronte.jpg",
+      "population": "19'464"
+    },
+    "linguaglossa": {
+      "location": { "lat": 37.8428, "lon": 15.1418},
+      "name": "Linguaglossa",
+      "text": "Linguaglossa was built upon a lava flow at the north-east flank of Mt. Etna in 1566. Today most inhabitants work in agriculture and forestry.",
+      "imageurl": "img/towns/linguaglossa.jpg",
+      "population": "5'456"
+    },
+    "taormina": {
+      "location": { "lat": 37.8516, "lon": 15.2853},
+      "name": "Taormina",
+      "text": "The village of Taormina is perched on a cliff overlooking the Ionian sea. Besides the ancient Greek theatre, it has many old churches, lively bars, fine restaurants, and antique shops. Taormina is approximately a forty-five minute drive away from Europe's largest active volcano, Mount Etna, which can also be seen from the famous Greek theatre in Taormina.",
+      "imageurl": "img/towns/taormina.jpg",
+      "population": "11'075"
+    },
+    "belpasso": {
+      "location": { "lat": 37.5203, "lon": 14.9272},
+      "name": "Belpasso",
+      "text": "The city's ancient name used to be Malpasso. An eruption in 1669 of Mt. Etna destroyed the city and it was rebuilt further down the slope of Etna. In 1693 it was again destroyed by an earthquake.",
+      "imageurl": "img/towns/belpasso.jpg",
+      "population": "25'304"
+    },
+    "giarre": {
+      "location": { "lat": 37.7234, "lon": 15.1668},
+      "name": "Giarre",
+      "text": "Some historians suppose that the ancient Greek city of Kallipolis was situated in the same territory of the present-day town of Giarre, but nowadays there is no relevant proof of it. Since the late 16th century until 1815 Giarre was a village of the county of Mascali.",
+      "imageurl": "img/towns/giarre.jpg",
+      "population": "27'785"
+    }
+
+  }
+}
