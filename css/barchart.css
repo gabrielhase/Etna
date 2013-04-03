@@ -2,6 +2,11 @@
   font-size: 0.7em;
 }
 
+/* make sure markers layer is always on top for tooltips */
+.markers {
+  z-index: 99 !important;
+}
+
 .axis path,
 .axis line {
   fill: none;

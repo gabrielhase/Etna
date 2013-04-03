@@ -2,8 +2,16 @@
 this.etna = this.etna || {};
 
 this.etna.d3layer = function(map, mapDrawSvg, mapDrawGroup) {
-  var bounds, etnaLocation, firstDraw, getDistance, project;
+  var bounds, etnaLocation, firstDraw, getDistance, plumes, project;
   etnaLocation = [15.004, 37.734];
+  plumes = {
+    0: 0.1,
+    1: 1,
+    2: 5,
+    3: 15,
+    4: 25,
+    5: 35
+  };
   bounds = {};
   firstDraw = true;
   project = function(location) {
@@ -15,7 +23,7 @@ this.etna.d3layer = function(map, mapDrawSvg, mapDrawGroup) {
     return [point.x, point.y];
   };
   getDistance = function(vei) {
-    return (vei * 5) / 111;
+    return plumes[vei] / 111;
   };
   return {
     draw: function() {
@@ -27,7 +35,7 @@ this.etna.d3layer = function(map, mapDrawSvg, mapDrawGroup) {
       pixelLocation = project(etnaLocation);
       return d3.selectAll('circle').attr('cx', pixelLocation[0]).attr('cy', pixelLocation[1]).attr('r', function(d, i) {
         var dist, distPoint, distPointLat;
-        dist = getDistance(d);
+        dist = getDistance(d.vei);
         distPointLat = etnaLocation[1] + dist;
         distPoint = project([etnaLocation[0], distPointLat]);
         return pixelLocation[1] - distPoint[1];

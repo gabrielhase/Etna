@@ -2,6 +2,13 @@
 
 @etna.eruptionsChart = do ->
   
+  craterLocations = {
+    "NorthEast": [15.0636, 37.7516],
+    "SouthEast": [15.0742, 37.7098],
+    "Voragine": [15.0677, 37.7305],
+    "Bocca Nuova": [15.0197, 37.7256]
+  }
+
   boundingBox = {"type": "FeatureCollection", "features": [
       {
         "type": "Feature",
@@ -36,14 +43,22 @@
   yAxis = d3.svg.axis().scale(y).orient('left').ticks(4)
 
   # init the non-changing data for this singleton
-  init: (eruptionData, map, circleLayer) =>
+  init: (eruptionData, map, circleLayer, markerLayer) =>
     @map = map
     @circleLayer = circleLayer
+    @markerLayer = markerLayer
+    @markerLayer.factory((f) ->
+      elem = mapbox.markers.simplestyle_factory(f)
+      return elem
+    )
+    @interaction = mapbox.markers.interaction(@markerLayer)
     @sanitizedData = []
     for eruption of eruptionData
       @sanitizedData.push
         'date': parseDate(eruption)
-        'vei': +eruptionData[eruption]
+        'vei': +eruptionData[eruption].vei
+        'craters': eruptionData[eruption].craters
+        'ash': eruptionData[eruption].ash
 
 
   drawBarchart: (eruptionData) =>
@@ -88,6 +103,7 @@
     @brush = d3.svg.brush()
       .x(x)
       .on('brush', etna.eruptionsChart.eruptionsBrush)
+      .on('brushend', etna.eruptionsChart.eruptionsBrushEnd)
 
     svg.append("g")
       .attr("class", "x brush")
@@ -102,9 +118,54 @@
     dataFiltered = @sanitizedData.filter( (d, i) ->
       true if (d.date >= focusScale.domain()[0]) && (d.date <= focusScale.domain()[1])
     )
-    veis = []
-    for datum in dataFiltered
-      veis.push(datum.vei)
-    @circleLayer.data(boundingBox, veis);
+    # veis = []
+    # for datum in dataFiltered
+    #   veis.push(datum.vei)
+    @circleLayer.data(boundingBox, dataFiltered);
     @circleLayer.draw();
     @map.refresh();
+
+  eruptionsBrushEnd: () =>
+    dataFiltered = @sanitizedData.filter( (d, i) ->
+      true if (d.date >= focusScale.domain()[0]) && (d.date <= focusScale.domain()[1])
+    )
+    
+    craterExplosions = {}
+    ashFalls = {}
+    for datum in dataFiltered
+      for crater in datum.craters
+        craterExplosions[crater] ||= []
+        craterExplosions[crater].push(datum.date.getFullYear())
+      for town in datum.ash
+        ashFalls[town] ||= []
+        ashFalls[town].push(datum.date.getFullYear())
+
+    @markerLayer.features([])
+    for craterName of craterExplosions
+      tooltipTitle = "Explosion at crater #{craterName}"
+      tooltipText = craterExplosions[craterName].join(', ')
+
+      @markerLayer.add_feature
+        geometry:
+          coordinates: craterLocations[craterName]
+        properties:
+          'marker-color': '#993341'
+          'marker-symbol': 'minefield'
+          title: "#{tooltipTitle} in #{tooltipText}" 
+    
+    for townName of ashFalls
+      tooltipTitle = "Ash falling on #{townName}"
+      tooltipText = ashFalls[townName].join(', ')
+      location = etna.towns[townName]?.location
+      # TODO: add additional locations
+      if location
+        @markerLayer.add_feature
+          geometry:
+            coordinates: [location.lon, location.lat]
+          properties:
+            'marker-color': '#777'
+            'marker-symbol': 'star-stroked'
+            title: "#{tooltipTitle} in #{tooltipText}"
+
+    # make sure z-index of markers is good
+    $('.simplestyle-marker').parent().attr('class', 'markers')

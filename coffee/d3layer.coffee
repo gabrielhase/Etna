@@ -4,6 +4,15 @@
 # uses d3 to draw on a mapbox layer.
 @etna.d3layer = (map, mapDrawSvg, mapDrawGroup) ->
   etnaLocation = [15.004, 37.734]
+  # official plume area for different VEI values (from Wikipedia)
+  plumes = {
+    0: 0.1,
+    1: 1,
+    2: 5,
+    3: 15,
+    4: 25,
+    5: 35
+  }
   bounds = {}
   firstDraw = true
 
@@ -16,7 +25,7 @@
 
   # calculates the distance in lat points with the hack 111km = 1 lat point
   getDistance = (vei) ->
-    (vei * 5) / 111;  # each VEI point corresponds to 5km
+    plumes[vei] / 111;  # each VEI point corresponds to the official plume area
 
   # draws the circles by projecting the center and taking a point with
   # x km distance to the north lat and calculating the radius in px from this.
@@ -34,7 +43,7 @@
       .attr('cx', pixelLocation[0])
       .attr('cy', pixelLocation[1])
       .attr('r', (d, i) ->
-        dist = getDistance(d)
+        dist = getDistance(d.vei)
         distPointLat = etnaLocation[1] + dist
         distPoint = project([etnaLocation[0], distPointLat])
         pixelLocation[1] - distPoint[1]

@@ -16,7 +16,7 @@ this.etna.map = (function() {
       layer = mapbox.layer().id('gabriel-hase.map-25owz48z');
       this.map = mapbox.map('map', layer, null, [MM.DragHandler(), MM.DoubleClickHandler()]);
       this.map.ui.zoomer.add();
-      this.map.setZoomRange(8, 12);
+      this.map.setZoomRange(8, 16);
       this.map.setPanLimits([
         {
           lat: 37.2,
@@ -42,8 +42,10 @@ this.etna.map = (function() {
       }, 10);
       this.teaserHtml = $("#map-legend").html();
       this.initEvents();
+      this.markerLayer = mapbox.markers.layer();
+      this.map.addLayer(this.markerLayer);
       this.initD3Layer();
-      etna.eruptionsChart.init(etna.eruptions, this.map, this.circleLayer);
+      etna.eruptionsChart.init(etna.eruptions, this.map, this.circleLayer, this.markerLayer);
       return etna.eruptionsChart.drawBarchart(etna.eruptions);
     },
     initD3Layer: function() {
@@ -112,24 +114,26 @@ this.etna.map = (function() {
       }
     },
     showRegion: function(region) {
-      var location, zoom;
+      var location, zoom,
+        _this = this;
       if (region === "map") {
-        this.map.ease.location({
+        return this.map.ease.location({
           lat: 37.734,
           lon: 15.004
-        }).zoom(10).optimal();
-        $("#map-legend").html(this.teaserHtml);
-        etna.eruptionsChart.drawBarchart(etna.eruptions);
-        return;
+        }).zoom(10).optimal(0.9, 1.42, function() {
+          $("#map-legend").html(_this.teaserHtml);
+          etna.eruptionsChart.drawBarchart(etna.eruptions);
+          return _this.toggleLegend();
+        });
       } else {
         location = etna.towns[region].location;
         this.displayRegionLegend(region);
+        zoom = 12;
+        if (zoom !== this.map.zoom()) {
+          regionZoom = true;
+        }
+        return this.map.ease.location(location).zoom(zoom).optimal();
       }
-      zoom = 15;
-      if (zoom !== this.map.zoom()) {
-        regionZoom = true;
-      }
-      return this.map.ease.location(location).zoom(zoom).optimal();
     }
   };
 })();

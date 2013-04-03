@@ -20,7 +20,7 @@
     # Here we have it empty, to disable zooming and panning.
     @map = mapbox.map('map', layer, null, [MM.DragHandler(), MM.DoubleClickHandler()])
     @map.ui.zoomer.add()
-    @map.setZoomRange(8, 12)
+    @map.setZoomRange(8, 16)
     # etna always in sight
     @map.setPanLimits([{ lat: 37.2, lon: 13.5 }, { lat: 38.2, lon: 16.5 }])
 
@@ -43,21 +43,24 @@
     # init map events and controls
     @initEvents()
 
+    @markerLayer = mapbox.markers.layer()
+    @map.addLayer(@markerLayer)
+
     # init the layer on which the eruption circles will be drawn
     @initD3Layer()
 
     # init and draw the barchart
-    etna.eruptionsChart.init(etna.eruptions, @map, @circleLayer)
+    etna.eruptionsChart.init(etna.eruptions, @map, @circleLayer, @markerLayer)
     etna.eruptionsChart.drawBarchart(etna.eruptions)
 
-    
+
   initD3Layer: () ->
     mapDrawDiv = d3.select(document.body)
       .append('div')
       .attr('class', 'd3-vec')
     mapDrawSvg = mapDrawDiv.append('svg')
     mapDrawGroup = mapDrawSvg.append('g')
-    @circleLayer = etna.d3layer(@map, mapDrawSvg, mapDrawGroup);
+    @circleLayer = etna.d3layer(@map, mapDrawSvg, mapDrawGroup)
     @circleLayer.parent = mapDrawDiv.node()
     @map.addLayer(@circleLayer)
 
@@ -124,17 +127,18 @@
       # regionZoom = true if 13 != @map.zoom()
       #@hideLegend()
       # @map.centerzoom(, 13)
-      @map.ease.location({ lat: 37.734, lon: 15.004 }).zoom(10).optimal()
-      #return
-      $("#map-legend").html(@teaserHtml) #empty
-      etna.eruptionsChart.drawBarchart(etna.eruptions)
-      return
+      
+      @map.ease.location({ lat: 37.734, lon: 15.004 }).zoom(10).optimal(0.9, 1.42, () =>
+        $("#map-legend").html(@teaserHtml) #empty
+        etna.eruptionsChart.drawBarchart(etna.eruptions)
+        @toggleLegend()
+      )
     else
       location = etna.towns[region].location
       # @toggleLegend() if $("#map-legend").is(":visible")
       @displayRegionLegend(region)
-    
-    # center region
-    zoom = 15
-    regionZoom = true if zoom != @map.zoom()
-    @map.ease.location(location).zoom(zoom).optimal()
+
+      # center region
+      zoom = 12
+      regionZoom = true if zoom != @map.zoom()
+      @map.ease.location(location).zoom(zoom).optimal()

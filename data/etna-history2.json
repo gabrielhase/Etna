@@ -1,0 +1,125 @@
+{
+  "2011": {
+    "vei": 0,
+    "craters": [],
+    "sideeffects": [],
+    "lavaflows": [],
+    "ash": [],
+    "destroyed": []
+  },
+  "2010": {
+    "vei": 2,
+    "craters": ["SouthEast", "Bocca Nuova", "NorthEast"],
+    "sideeffects": [],
+    "lavaflows": [],
+    "ash": [],
+    "destroyed": []
+  },
+  "2008": {
+    "vei": 1,
+    "craters": ["Voragine"],
+    "sideeffects": ["earthquakes"],
+    "lavaflows": [
+      { "?": 6.5 }
+    ],
+    "ash": [],
+    "destroyed": []
+  },
+  "2007": {
+    "vei": 2,
+    "craters": ["SouthEast"],
+    "sideeffects": ["airportShutdown"],
+    "lavaflows": [
+      { "Valle del Bove": 4.5 },
+      { "Valle del Bove": 6.2 }
+    ],
+    "ash": ["EastFlank, NorthFlank"],
+    "destroyed": []
+  },
+  "2006": {
+    "vei": 2,
+    "craters": ["SouthEast"],
+    "sideeffects": [],
+    "lavaflows": [],
+    "ash": [],
+    "destroyed": []
+  },
+  "2005": {
+    "vei": 1,
+    "craters": ["SouthEast"],
+    "sideeffects": [],
+    "lavaflows": [
+      { "Valle del Bove": 3 }
+    ],
+    "ash": [],
+    "destroyed": []
+  },
+  "2004": {
+    "vei": 1,
+    "craters": ["SouthEast"],
+    "sideeffects": [],
+    "lavaflows": [],
+    "ash": [],
+    "destroyed": []
+  },
+  "2003": {
+    "vei": 1,
+    "craters": ["SouthEast"],
+    "sideeffects": [],
+    "lavaflows": [],
+    "ash": [],
+    "destroyed": []
+  },
+  "2002": {
+    "vei": 3,
+    "craters": ["Voragine"],
+    "sideeffects": ["deformation", "touristStationDestroyed"],
+    "lavaflows": [],
+    "ash": ["catania", "belpasso"],
+    "destroyed": []
+  },
+  "1999": {
+    "vei": 1,
+    "craters": ["Voragine"],
+    "sideeffects": [],
+    "lavaflows": [
+      { "south": 0.5 }
+    ],
+    "ash": ["giarre"],
+    "destroyed": []
+  },
+  "1998": {
+    "vei": 1,
+    "craters": ["Voragine"],
+    "sideeffects": [],
+    "lavaflows": [],
+    "ash": ["catania", "siracusa", "zafferana"],
+    "destroyed": []
+  },
+  "1995": {
+    "vei": 3,
+    "craters": ["NorthEast"],
+    "sideeffects": ["airportShutdown"],
+    "lavaflows": [],
+    "ash": ["giarre"],
+    "destroyed": []
+  },
+  "1993": {
+    "vei": 1,
+    "craters": ["SouthEast"],
+    "sideeffects": ["airportShutdown"],
+    "lavaflows": [
+      { "SSouthEast": "upToZafferana"}
+    ],
+    "ash": [],
+    "destroyed": []
+  },
+  "1991": {
+    "vei": 2,
+    "craters": ["SouthEast"],
+    "sideeffects": [],
+    "lavaflows": [],
+    "ash": [],
+    "destroyed": []
+  }
+}
