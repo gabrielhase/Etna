@@ -3,15 +3,15 @@
 @etna.map = do ->
   templates = @etna.templates
   regionZoom = false
-  
+
   towns: {}
   eruptions: {}
 
-  init: (townsData, eruptionData) ->     
+  init: (townsData, eruptionData) ->
     # load data
     etna.towns = townsData.towns
     etna.eruptions = eruptionData
-    
+
     #Create map
     layer = mapbox.layer().id('gabriel-hase.map-25owz48z')
 
@@ -22,7 +22,7 @@
     @map.ui.zoomer.add()
     @map.setZoomRange(8, 16)
     # etna always in sight
-    @map.setPanLimits([{ lat: 37.2, lon: 13.5 }, { lat: 38.2, lon: 16.5 }])
+    @map.setPanLimits([{ lat: 36.8, lon: 13.5 }, { lat: 38.5, lon: 16.5 }])
 
     # callbacks
     @map.addCallback "zoomed", (map, zoomOffset) =>
@@ -30,16 +30,16 @@
         regionZoom = false
       else
         @hideLegend()
-    
+
     @map.addCallback "panned", (map, zoomOffset) =>
       @hideLegend()
 
     # position map
     @map.centerzoom({ lat: 37.734, lon: 15.004 }, 10)
-    
+
     # teaser
     @teaserHtml = $("#map-legend").html() # only the close icon for now
-    
+
     # init map events and controls
     @initEvents()
 
@@ -66,19 +66,19 @@
 
 
   initEvents: () ->
-    
+
     # hide legend and tooltips if users clicks somewhere on the map
     $("#map").click (event) =>
       @hideLegend()
-      
+
     $("#map-legend").delegate ".close-map-legend", "click", (event) =>
       event.preventDefault()
       @toggleLegend()
-      
+
     $(".open-map-legend").click (event) =>
       event.preventDefault()
       @toggleLegend()
-    
+
     $(".region-link").click (event) =>
       event.preventDefault()
       $this = $(event.currentTarget)
@@ -91,16 +91,16 @@
     if !$("#map-legend").is(":visible")
       $("#map-legend").html(@teaserHtml) #empty
       etna.eruptionsChart.drawBarchart(etna.eruptions)
-      
+
     $("#map-legend").slideToggle()
     $("#map-legend-teaser").slideToggle()
-  
+
 
   hideLegend: () ->
     if $("#map-legend").is(":visible")
       $("#map-legend").slideUp()
       $("#map-legend-teaser").slideDown()
-  
+
 
   displayRegionLegend: (region) ->
     regionData = etna.towns[region]
@@ -111,7 +111,7 @@
       population: regionData.population
     )
     @displayLegend(newContent)
-      
+
 
   displayLegend: (html) ->
     $legend = $("#map-legend")
@@ -120,14 +120,14 @@
       $("#map-legend-teaser").slideToggle()
     else
       $legend.html(html)
-      
-      
+
+
   showRegion: (region) ->
     if region == "map"
       # regionZoom = true if 13 != @map.zoom()
       #@hideLegend()
       # @map.centerzoom(, 13)
-      
+
       @map.ease.location({ lat: 37.734, lon: 15.004 }).zoom(10).optimal(0.9, 1.42, () =>
         $("#map-legend").html(@teaserHtml) #empty
         etna.eruptionsChart.drawBarchart(etna.eruptions)

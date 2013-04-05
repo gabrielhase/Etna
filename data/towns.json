@@ -1,5 +1,5 @@
 {
-  "towns": {    
+  "towns": {
     "catania": {
       "location":  { "lat": 37.5080,  "lon": 15.0829 },
       "name": "Catania",
@@ -69,6 +69,20 @@
       "text": "Some historians suppose that the ancient Greek city of Kallipolis was situated in the same territory of the present-day town of Giarre, but nowadays there is no relevant proof of it. Since the late 16th century until 1815 Giarre was a village of the county of Mascali.",
       "imageurl": "img/towns/giarre.jpg",
       "population": "27'785"
+    },
+    "siracusa": {
+      "location": { "lat": 37.0755, "lon": 15.2866},
+      "name": "Siracusa",
+      "text": "Siracusa is a historic city in Sicily, the capital of the province of Syracuse. The city is notable for its rich Greek history, culture, amphitheatres, architecture, and as the birthplace of the preeminent mathematician and engineer Archimedes. The city was struck by two ruinous earthquakes in 1542 and 1693, and a plague in 1729.",
+      "imageurl": "img/towns/siracusa.jpg",
+      "population": "123'408"
+    },
+    "messina": {
+      "location": { "lat": 38.1938, "lon": 15.5540},
+      "name": "Messina",
+      "text": "Messina is the capital of the Italian province of Messina and the third largest city on the island of Sicily. In 1783, an earthquake devastated much of the city, and it took decades to rebuild and rekindle the cultural life of Messina.",
+      "imageurl": "img/towns/messina.jpg",
+      "population": "241'310"
     }
 
   }

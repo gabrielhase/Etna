@@ -19,10 +19,10 @@ this.etna.map = (function() {
       this.map.setZoomRange(8, 16);
       this.map.setPanLimits([
         {
-          lat: 37.2,
+          lat: 36.8,
           lon: 13.5
         }, {
-          lat: 38.2,
+          lat: 38.5,
           lon: 16.5
         }
       ]);

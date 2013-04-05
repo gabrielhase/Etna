@@ -7,10 +7,10 @@ body {
 }
 
 /* Map */
-#title { 
-  font-size: 3em; 
+#title {
+  font-size: 3em;
   color: #000;
-  position: absolute; 
+  position: absolute;
   top: 100px;
   left: 20px;
   z-index: 999;
@@ -18,21 +18,22 @@ body {
   padding: 10px 10px;
 }
 
-#map-container { 
-  width:100%; 
-  height: 500px; 
-  position: absolute; 
-  margin: 0 0 40px; 
-  padding: 0; 
+#map-container {
+  width:100%;
+  min-height: 500px;
+  height: 95%;
+  position: absolute;
+  margin: 0 0 40px;
+  padding: 0;
 }
 
-#map { width:100%; height: 500px; }
+#map { width:100%; height: 95%; min-height: 500px; }
 
 #map-regions {
   position:absolute;
   top: 10px;
   left: 10px;
-  z-index: 99;    
+  z-index: 99;
   min-width: 120px;
 }
 
@@ -79,6 +80,20 @@ body {
   text-decoration: none;
 }
 
+ul.legend img {
+  padding: 0;
+  margin: 0;
+}
+
+ul.legend {
+  font-size: 0.7em;
+}
+
+ul.legend li span {
+  margin: 0;
+  padding: 0;
+}
+
 #map-legend {
   position: absolute;
   bottom: 0;
@@ -87,10 +102,10 @@ body {
   border: 1px solid #ccc;
   background: #fff;
   padding: 5px 10px;
-  
-/*  -webkit-transition: background 0.3s ease; 
-  -moz-transition: background 0.3s ease; 
-  -o-transition: background 0.3s ease; 
+
+/*  -webkit-transition: background 0.3s ease;
+  -moz-transition: background 0.3s ease;
+  -o-transition: background 0.3s ease;
   transition: background 0.3s ease;*/
 }
 
@@ -161,8 +176,8 @@ body {
 }
 
 #map-container h3,
-#map-container h4 { 
-  margin: 5px 0 10px; 
+#map-container h4 {
+  margin: 5px 0 10px;
 }
 
 #map-container p {
@@ -178,6 +193,6 @@ h4.tooltip-title{
 }
 
 p.tooltip-text {
-  font-size: 1em !important; 
+  font-size: 1em !important;
   line-height: 16px !important;
 }

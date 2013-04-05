@@ -121,5 +121,120 @@
     "lavaflows": [],
     "ash": [],
     "destroyed": []
+  },
+  "1990": {
+    "vei": 1,
+    "craters": ["SouthEast"],
+    "sideeffects": [],
+    "lavaflows": [],
+    "ash": ["NorthWestFlank", "Barcellona Pozzo di Grotto"],
+    "destroyed": []
+  },
+  "1986": {
+    "vei": 2,
+    "craters": ["NorthEast"],
+    "sideeffects": ["airportShutdown"],
+    "lavaflows": [
+      { "SouthEast": 1.5 }
+    ],
+    "ash": ["SouthEastFlank", "siracusa"],
+    "destroyed": []
+  },
+  "1983": {
+    "vei": 1,
+    "craters": ["Bocca Nuova"],
+    "sideeffects": [],
+    "lavaflows": [
+      { "South": 6.5 }
+    ],
+    "ash": [],
+    "destroyed": []
+  },
+  "1981": {
+    "vei": 2,
+    "craters": ["NorthEast"],
+    "sideeffects": [],
+    "lavaflows": [
+      { "North": 6 }
+    ],
+    "ash": [],
+    "destroyed": []
+  },
+  "1979": {
+    "vei": 2,
+    "craters": ["SouthEast"],
+    "sideeffects": ["airportShutdown"],
+    "lavaflows": [],
+    "ash": ["catania", "siracusa"],
+    "destroyed": []
+  },
+  "1971": {
+    "vei": 2,
+    "craters": [],
+    "sideeffects": [],
+    "lavaflows": [],
+    "ash": [],
+    "destroyed": []
+  },
+  "1960": {
+    "vei": 1,
+    "craters": ["Voragine"],
+    "sideeffects": [],
+    "lavaflows": [],
+    "ash": ["taormina", "messina"],
+    "destroyed": []
+  },
+  "1949": {
+    "vei": 2,
+    "craters": [],
+    "sideeffects": [],
+    "lavaflows": [],
+    "ash": [],
+    "destroyed": []
+  },
+  "1947": {
+    "vei": 3,
+    "craters": ["NorthEast"],
+    "sideeffects": [],
+    "lavaflows": [],
+    "ash": ["EastFlank", "giarre"],
+    "destroyed": []
+  },
+  "1940": {
+    "vei": 2,
+    "craters": ["NorthEast"],
+    "sideeffects": [],
+    "lavaflows": [],
+    "ash": ["EastFlank", "messina"],
+    "destroyed": []
+  },
+  "1928": {
+    "vei": 1,
+    "craters": ["NorthEast"],
+    "sideeffects": [],
+    "lavaflows": [
+      { "East": "up to mascali" }
+    ],
+    "ash": ["EastFlank", "messina"],
+    "destroyed": ["mascali"]
+  },
+  "1910": {
+    "vei": 1,
+    "craters": ["Voragine", "SouthEast", "Bocca Nuova", "NorthEast"],
+    "sideeffects": [],
+    "lavaflows": [
+      { "South": "up to belpasso" }
+    ],
+    "ash": [],
+    "destroyed": ["cavaliere"]
+  },
+  "1908": {
+    "vei": 2,
+    "craters": ["SouthEast"],
+    "sideeffects": ["earthquakes"],
+    "lavaflows": [],
+    "ash": [],
+    "destroyed": []
   }
+
 }
