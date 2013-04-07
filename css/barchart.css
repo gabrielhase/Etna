@@ -1,5 +1,6 @@
 #map-legend {
   font-size: 0.7em;
+  z-index: 100;
 }
 
 /* make sure markers layer is always on top for tooltips */
