@@ -1,0 +1,146 @@
+div{
+    display:block;
+}
+
+#neg_legend {
+    background:red;
+    color:white;
+    display: inline-block;
+    position:absolute;
+    right:130px;
+    bottom:0;
+}
+#neu_legend {
+    background:yellow;
+    color:white;
+    display: inline-block;
+    position:absolute;
+    color:black;
+    right:70px;
+    bottom:0;
+
+}
+#pos_legend {
+    background:green;
+    color:white;
+    display: inline-block;
+    position:absolute;
+    color:black;
+    right:0px;
+    bottom:0;
+
+}
+
+#sentiment {
+    background:lightgray;
+    position:absolute;
+    top:570px;
+    left:250px;
+    width:500px;
+    height:150px;
+}
+
+#tooltip {
+  border:1px solid black;
+  background:white;
+  width:200px;
+}
+
+.Invisible {
+    display:none;
+}
+
+.Visible {
+    display:block;
+}
+
+#scale {
+    position: relative;
+    height:30px;
+    width:500px;
+}
+
+#negative{
+    display: inline-block;
+    position: absolute;
+    float:left;
+    color:black;
+
+}
+
+#neutral{
+    display: inline-block;
+    position: absolute;
+    left:100px;
+    color:black;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in-out;
+}
+
+#positive{
+    display: inline-block;
+    position:absolute;
+    right:0;
+    color:black;
+    float:right;
+}
+
+
+#scale_nr {
+    position: relative;
+    height:30px;
+    width:500px;
+}
+#_nr {
+    display: inline-block;
+    position: absolute;
+    float:left;
+    left:-99px;
+    color:black;
+}
+#nr {
+    display: inline-block;
+    position: absolute;
+    float:left;
+    left:-99px;
+    color:black;
+}
+
+
+#negative_nr{
+    display: inline-block;
+    position: absolute;
+    float:left;
+    color:black;
+
+}
+
+#neutral_nr{
+    display: inline-block;
+    position: absolute;
+    left:100px;
+    color:black;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in-out;
+}
+
+#positive_nr{
+    display: inline-block;
+    position:absolute;
+    right:0;
+    color:black;
+    float:right;
+}
+
+
+
+#choice {
+
+    display: inline-block;
+    position:absolute;
+    bottom:0;
+
+}
+

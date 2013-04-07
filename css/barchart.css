@@ -22,7 +22,7 @@
   display: none;
 }
 
-rect {
+.barchart rect {
   fill: #993341;
 }
 
