@@ -1,7 +1,7 @@
 @etna = @etna || {}
 
 @etna.eruptionsChart = do ->
-  
+
   craterLocations = {
     "NorthEast": [15.0636, 37.7516],
     "SouthEast": [15.0742, 37.7098],
@@ -31,13 +31,14 @@
   margin = {top: 20, right: 40, bottom: 20, left: 50}
   width = 960 - margin.left - margin.right
   height = 100 - margin.top - margin.bottom
-  
+
   parseDate = d3.time.format("%Y").parse
 
   x = d3.time.scale().range([0, width])
   y = d3.scale.linear().range([height, 0])
 
   focusScale = d3.time.scale() # a scale without a range
+  lastExtent = undefined
 
   xAxis = d3.svg.axis().scale(x).orient("bottom")
   yAxis = d3.svg.axis().scale(y).orient('left').ticks(4)
@@ -69,10 +70,10 @@
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
-    x.domain(d3.extent(@sanitizedData, (d) -> 
-      d.date 
+    x.domain(d3.extent(@sanitizedData, (d) ->
+      d.date
     ))
-    y.domain(d3.extent(@sanitizedData, (d) -> 
+    y.domain(d3.extent(@sanitizedData, (d) ->
       d.vei
     ))
 
@@ -89,7 +90,7 @@
       .data(@sanitizedData)
       .enter()
       .append('rect')
-        .attr('x', (d, i) -> 
+        .attr('x', (d, i) ->
           x(d.date)
         )
         .attr('y', (d) ->
@@ -105,15 +106,19 @@
       .on('brush', etna.eruptionsChart.eruptionsBrush)
       .on('brushend', etna.eruptionsChart.eruptionsBrushEnd)
 
-    svg.append("g")
+    barchartGroup = svg.append("g")
       .attr("class", "x brush")
       .call(@brush)
-      .selectAll("rect")
+    bars = barchartGroup.selectAll("rect")
         .attr("y", -6)
         .attr("height", height + 7)
+    # redraw the selection if there is a last extent
+    barchartGroup.call(@brush.extent(lastExtent)) if lastExtent
 
 
   eruptionsBrush: () =>
+    # remember last extent for later
+    lastExtent = @brush.extent()
     focusScale.domain(@brush.extent())
     dataFiltered = @sanitizedData.filter( (d, i) ->
       true if (d.date >= focusScale.domain()[0]) && (d.date <= focusScale.domain()[1])
@@ -129,7 +134,7 @@
     dataFiltered = @sanitizedData.filter( (d, i) ->
       true if (d.date >= focusScale.domain()[0]) && (d.date <= focusScale.domain()[1])
     )
-    
+
     craterExplosions = {}
     ashFalls = {}
     for datum in dataFiltered
@@ -151,8 +156,8 @@
         properties:
           'marker-color': '#993341'
           'marker-symbol': 'minefield'
-          title: "#{tooltipTitle} in #{tooltipText}" 
-    
+          title: "#{tooltipTitle} in #{tooltipText}"
+
     for townName of ashFalls
       tooltipTitle = "Ash falling on #{townName}"
       tooltipText = ashFalls[townName].join(', ')

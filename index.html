@@ -110,6 +110,11 @@
 
     <script>
       $(document).ready( function() {
+        // redirect in case of a https domain (e.g. GDrive)
+        if (window.location.protocol == 'https:') {
+          window.location = 'http://eye-on-etna.herokuapp.com/'
+        }
+
         d3.json('data/towns.json', function(error, towns) {
           if (error) {
             console.log(error);

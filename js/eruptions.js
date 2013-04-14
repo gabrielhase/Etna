@@ -2,7 +2,7 @@
 this.etna = this.etna || {};
 
 this.etna.eruptionsChart = (function() {
-  var boundingBox, craterLocations, focusScale, height, margin, parseDate, width, x, xAxis, y, yAxis,
+  var boundingBox, craterLocations, focusScale, height, lastExtent, margin, parseDate, width, x, xAxis, y, yAxis,
     _this = this;
   craterLocations = {
     "NorthEast": [15.0636, 37.7516],
@@ -39,6 +39,7 @@ this.etna.eruptionsChart = (function() {
   x = d3.time.scale().range([0, width]);
   y = d3.scale.linear().range([height, 0]);
   focusScale = d3.time.scale();
+  lastExtent = void 0;
   xAxis = d3.svg.axis().scale(x).orient("bottom");
   yAxis = d3.svg.axis().scale(y).orient('left').ticks(4);
   return {
@@ -66,7 +67,7 @@ this.etna.eruptionsChart = (function() {
       return _results;
     },
     drawBarchart: function(eruptionData) {
-      var svg;
+      var barchartGroup, bars, svg;
       svg = d3.select("#map-legend").append("svg").attr('class', 'barchart').attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
       x.domain(d3.extent(_this.sanitizedData, function(d) {
         return d.date;
@@ -84,10 +85,15 @@ this.etna.eruptionsChart = (function() {
         return height - y(d.vei);
       }).attr('width', 7);
       _this.brush = d3.svg.brush().x(x).on('brush', etna.eruptionsChart.eruptionsBrush).on('brushend', etna.eruptionsChart.eruptionsBrushEnd);
-      return svg.append("g").attr("class", "x brush").call(_this.brush).selectAll("rect").attr("y", -6).attr("height", height + 7);
+      barchartGroup = svg.append("g").attr("class", "x brush").call(_this.brush);
+      bars = barchartGroup.selectAll("rect").attr("y", -6).attr("height", height + 7);
+      if (lastExtent) {
+        return barchartGroup.call(_this.brush.extent(lastExtent));
+      }
     },
     eruptionsBrush: function() {
       var dataFiltered;
+      lastExtent = _this.brush.extent();
       focusScale.domain(_this.brush.extent());
       dataFiltered = _this.sanitizedData.filter(function(d, i) {
         if ((d.date >= focusScale.domain()[0]) && (d.date <= focusScale.domain()[1])) {
