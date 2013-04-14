@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/map.css">
     <link rel="stylesheet" href="css/barchart.css">
     <link rel="stylesheet" href="css/sentiment.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
 
     <script src="js/vendor/d3.v3.js"></script>
     <script src="js/vendor/jquery-1.9.1.js"></script>
@@ -17,95 +18,107 @@
     <script src="js/eruptions.js"></script>
     <script src="js/d3layer.js"></script>
     <script src="js/map.js"></script>
+    <script src="js/towns.js"></script>
     <script src="js-sebastian/tweets.js"></script>
     <script src="js-sebastian/sentiment.js"></script>
   </head>
 
-  <body>
-    <h1 id="title">Under the pine trees of Mt. Etna</h1>
-    <div id="map-container">
-      <div id='map'>
+  <body class="container">
+    <div class="row">
+      <div class="span8">
+      <h1>Etna: Curse or Attraction?</h1>
+      <p>TODO: Intro with article from The Economist.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, cum, delectus laboriosam ut quo modi veritatis atque sint incidunt voluptatem quidem perferendis dolores eligendi fugiat dolorum ipsa recusandae quibusdam veniam!</p>
       </div>
+      <div class="span4">
 
-      <div id="map-regions">
-        <div class="corner">
-          <a href="" class="region-link image-link" data-region="map">
-            <img src="img/volcano_icon.png" alt="Region Etna" width="47" style="border-bottom: 1px solid #eee" />
-            <span style="position:absolute; top: 15px; right: 10px;">Eruptions</span>
-          </a>
-        </div>
-
-        <div class="content" id="towns-navigation">
-        </div>
-      </div>
-
-      <div id="map-legend" class="transparent">
-        <h3>Eruptions at Mt. Etna</h3>
-        <p>Use the mouse to select the eruption interval you're interested in or click on a town in the top-left navigation to get details about the towns around Mt. Etna.</p>
-        <a class="close-map-legend legend-close-link" href="">x</a>
-      </div>
-      <div id="map-legend-teaser" style="display:none">
-        <a href="" class="open-map-legend">All volcano eruptions</a>
       </div>
     </div>
-
-    <h1 style="position: absolute; top: 500px; left: 20px">Tweets about Etna</h1>
-    <div id="sentiment">
-      <div id="legend">
-        <div id="neg_legend"><strong>negative</strong></div>
-        <div id="neu_legend"><strong>neutral</strong></div>
-        <div id="pos_legend"><strong>positive</strong></div>
+    <br/>
+    <br/>
+    <div class="row">
+      <div class="span12">
+        <h2>Living around Etna</h2>
+        <p>TODO: text to explain the visualization and background like the VEI.</p>
       </div>
 
-      <div id="scale_nr">
-        <div id="_nr"><strong>nr</strong></div>
-        <div id="negative_nr"><strong></strong></div>
-        <div id="neutral_nr"><strong></strong></div>
-        <div id="positive_nr"><strong></strong></div>
+      <div class="span8" style="position: relative; height: 500px">
+        <div id="map-container">
+          <div id='map'>
+          </div>
+
+          <div id="map-regions">
+            <div class="corner">
+              <a href="" class="home-link image-link" data-region="map">
+                <img src="img/volcano_icon.png" alt="Region Etna" width="47" style="border-bottom: 1px solid #eee" />
+                <span style="position:absolute; top: 15px; left: 50px;">To Etna</span>
+              </a>
+            </div>
+
+            <div class="content">
+              <hr>
+              <ul class="legend">
+                <li><img src="img/plume_icon.png" width="15" height="15" /> <span>Plume Area</span></li>
+                <li><img src="img/explosion_icon.png" width="15" height="15" /> <span>Explosion</span></li>
+                <li><img src="img/ash_icon.png" width="15" height="15" /> <span>Ashfall</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div id="map-legend" class="transparent">
+            <h4>Eruptions at Mt. Etna<small>&nbsp;Use the mouse to select</small></h4>
+            <a class="close-map-legend legend-close-link" href="">x</a>
+          </div>
+
+          <div id="map-legend-teaser" style="display:none">
+            <a href="" class="open-map-legend">All volcano eruptions</a>
+          </div>
+
+        </div>
       </div>
 
-      <div id="svgContainer" onmousemove="etna.sentimentChart.myMM(event);" onmouseout="etna.sentimentChart.hideTooltip();"></div>
-
-      <div id="scale">
-        <div id="nr"><strong>nr</strong></div>
-        <div id="negative"><strong></strong></div>
-        <div id="neutral"><strong></strong></div>
-        <div id="positive"><strong></strong></div>
-      </div>
-
-      <div id="choice">
-        <input type="checkbox" id="chkbx" name="list" value="1">colorblind friendly colorscheme<br></input>
-        <div id="drpdwn"></div>
+      <div class="span4">
+        <div id="towns-explorer">
+        </div>
       </div>
     </div>
-    <div id="tooltip" class="Invisible"></div>
+    <div class="clearfix"></div>
+    <div class="row" style="position:relative; height: 400px">
+      <h2>Etna as a tourist attraction</h2>
+      <p>TODO: text about volcano travelling and Etna tours.</p>
+      <div id="sentiment">
+        <div id="legend">
+          <div id="neg_legend"><strong>negative</strong></div>
+          <div id="neu_legend"><strong>neutral</strong></div>
+          <div id="pos_legend"><strong>positive</strong></div>
+        </div>
 
-    <div style="position: absolute; left: 20px; top: 800px;">
-      <h3>Team</h3>
-      <ul>
-        <li>Gabriel Hase</li>
-        <li>Sebastian Spiegl</li>
-      </ul>
-      <h3>Map</h3>
-      <p>The map shows the region around Mt. Etna as well as an overlayed layer with additional information on a map selection. Map selections are made in the top-left navigation on the map.</p>
-      <p>There are 2 types of selections:
-        <ul>
-          <li>Brushing over the bar chart with the eruption history will draw additional information to the eruptions in the map.</li>
-          <li>Clicking on one of the towns in the top-left navigation will zoom on that town and display additional information on the town like population count.</li>
-        </ul>
-      </p>
-      <p>By combining the two selection methods a user can explore what the influence of the eruptions were on the people living around Mt. Etna.</p>
-      <h3>Sentiment Analysis</h3>
-      <p>The sentiment analysis graph displays tweets containing "etna", passed through sentiment analysis, as a stacked bar chart.</p>
-      <p>Sentiment analysis returns a value between -1 (negative) and +1(positive) representing its polarity. As sentiment analysis is not 100% accurate a threshold of +-0.3 is used. Everything below will be considered as “neutral”.</p>
-      <p>A <strong>drop down list</strong> with aditional filters can be used to exclude tweets not containing the choice. The graph is updated automatically</p>
-      <p>aditionally a <strong>tooltip</strong> shows the underlying twee and sentiment </p>
-      <h3>Screencast</h3>
-      <iframe width="640" height="360" src="http://www.youtube.com/embed/_mNncAG1rPg" frameborder="0" allowfullscreen></iframe>
-      <h3>Same Screencast without me playing around with iMovies background music</h3>
-      <iframe width="640" height="480" src="http://www.youtube.com/embed/eSXDmGvVb4g" frameborder="0" allowfullscreen></iframe>
-      <h3>Process Book</h3>
-      <iframe width="900" height="600" src="https://docs.google.com/document/d/16M7rL6ZxBwyhlja9uSEcEyOk0tqMs-wAU1Db03PRxyY/pub?embedded=true"></iframe>
+        <div id="scale_nr">
+          <div id="_nr"><strong>nr</strong></div>
+          <div id="negative_nr"><strong></strong></div>
+          <div id="neutral_nr"><strong></strong></div>
+          <div id="positive_nr"><strong></strong></div>
+        </div>
+
+        <div id="svgContainer" onmousemove="etna.sentimentChart.myMM(event);" onmouseout="etna.sentimentChart.hideTooltip();"></div>
+
+        <div id="scale">
+          <div id="nr"><strong>nr</strong></div>
+          <div id="negative"><strong></strong></div>
+          <div id="neutral"><strong></strong></div>
+          <div id="positive"><strong></strong></div>
+        </div>
+
+        <div id="choice">
+          <input type="checkbox" id="chkbx" name="list" value="1">colorblind friendly colorscheme<br></input>
+          <div id="drpdwn"></div>
+        </div>
+      </div>
+      <div id="tooltip" class="Invisible"></div>
+    </div>
+
+    <div class="row">
+      <p>TODO: closing comments</p>
     </div>
 
     <script>
@@ -120,14 +133,14 @@
             console.log(error);
           }
           // init the towns navigation
-          $("#towns-navigation").html(etna.templates.townsNavigation(towns));
+          $("#towns-explorer").html(etna.templates.townsNavigation(towns));
           d3.json('data/etna-history2.json', function(error, eruptions) {
             if (error) {
               console.log(error);
             }
             // init the map
             etna.map.init(towns, eruptions);
-            $("#title").fadeOut({'duration': 6000, 'easing': 'swing'});
+            etna.townsExplorer.init(towns);
           });
         });
         // init the sentiment chart

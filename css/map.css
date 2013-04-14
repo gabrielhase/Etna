@@ -6,28 +6,15 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Map */
-#title {
-  font-size: 3em;
-  color: #000;
-  position: absolute;
-  top: 100px;
-  left: 20px;
-  z-index: 999;
-  background: #fff;
-  padding: 10px 10px;
-}
-
 #map-container {
-  width:100%;
-  min-height: 500px;
   height: 500px;
+  width: 100%;
   position: absolute;
   margin: 0 0 40px;
   padding: 0;
 }
 
-#map { width:100%; height: 500px; min-height: 500px; }
+#map { height: 500px; }
 
 #map-regions {
   position:absolute;
@@ -128,35 +115,6 @@ ul.legend li span {
 .map-legend-left p {
   font-size: 15px !important;
   line-height: 22px !important;
-}
-
-#map-legend .img-right {
-  position: absolute;
-  bottom: 0;
-  right: 10px;
-}
-
-#map-legend .img-left {
-  float: left;
-  margin: 10px 20px 0 0;
-  border: 1px solid #ccc;
-  padding: 3px;
-}
-
-#map-legend .image {
-  float: left;
-}
-
-#map-legend .image i {
-  clear: both;
-  display: block;
-  padding: 4px 0;
-  font-size: 1em;
-}
-
-#map-legend .date {
-  color: #999;
-  font-size: 1.2em;
 }
 
 .legend-close-link {

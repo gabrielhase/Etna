@@ -29,7 +29,7 @@
 
   # barchart margins
   margin = {top: 20, right: 40, bottom: 20, left: 50}
-  width = 960 - margin.left - margin.right
+  width = 640 - margin.left - margin.right
   height = 100 - margin.top - margin.bottom
 
   parseDate = d3.time.format("%Y").parse
@@ -99,7 +99,7 @@
         .attr('height', (d, i) ->
           height - y(d.vei)
         )
-        .attr('width', 7)
+        .attr('width', 4)
 
     @brush = d3.svg.brush()
       .x(x)

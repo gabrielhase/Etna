@@ -33,7 +33,7 @@ this.etna.eruptionsChart = (function() {
     bottom: 20,
     left: 50
   };
-  width = 960 - margin.left - margin.right;
+  width = 640 - margin.left - margin.right;
   height = 100 - margin.top - margin.bottom;
   parseDate = d3.time.format("%Y").parse;
   x = d3.time.scale().range([0, width]);
@@ -83,7 +83,7 @@ this.etna.eruptionsChart = (function() {
         return y(d.vei);
       }).attr('height', function(d, i) {
         return height - y(d.vei);
-      }).attr('width', 7);
+      }).attr('width', 4);
       _this.brush = d3.svg.brush().x(x).on('brush', etna.eruptionsChart.eruptionsBrush).on('brushend', etna.eruptionsChart.eruptionsBrushEnd);
       barchartGroup = svg.append("g").attr("class", "x brush").call(_this.brush);
       bars = barchartGroup.selectAll("rect").attr("y", -6).attr("height", height + 7);

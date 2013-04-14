@@ -4,22 +4,17 @@
 
   townsNavigation: _.template(
     """
-    <ul><span style="margin-left: 10px">Towns:</span>
+    <ul><span>Towns:</span>
     <% for ( var town in towns ) { %>
       <li><a href="" class="region-link" data-region="<%= town %>"><%= towns[town].name %></a></li>
     <% } %>
-    </ul>
-    <hr>
-    <ul class="legend">
-      <li><img src="img/plume_icon.png" width="15" height="15" /> <span>Plume Area</span></li>
-      <li><img src="img/explosion_icon.png" width="15" height="15" /> <span>Explosion</span></li>
-      <li><img src="img/ash_icon.png" width="15" height="15" /> <span>Ashfall</span></li>
     </ul>
     """
   )
 
   regionTeaser: _.template(
     """
+    <a href="" id="back-to-towns">«&nbsp;Back to all towns</a>
     <div class="image">
       <img src="<%= imageurl %>" class="img-left" height="120">
       <i>Population: <%= population %></i>
@@ -30,7 +25,6 @@
         <%= teaser %>
       </p>
     </div>
-    <a class="close-map-legend legend-close-link" href="">x</a>
     """
   )
 

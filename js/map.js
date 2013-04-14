@@ -70,12 +70,9 @@ this.etna.map = (function() {
         event.preventDefault();
         return _this.toggleLegend();
       });
-      return $(".region-link").click(function(event) {
-        var $this, region;
+      return $(".home-link").click(function(event) {
         event.preventDefault();
-        $this = $(event.currentTarget);
-        region = $this.data("region");
-        return _this.showRegion(region);
+        return _this.resetInitialState();
       });
     },
     toggleLegend: function() {
@@ -92,48 +89,25 @@ this.etna.map = (function() {
         return $("#map-legend-teaser").slideDown();
       }
     },
-    displayRegionLegend: function(region) {
-      var newContent, regionData;
-      regionData = etna.towns[region];
-      newContent = templates.regionTeaser({
-        title: regionData.name,
-        teaser: regionData.text,
-        imageurl: regionData.imageurl,
-        population: regionData.population
+    resetInitialState: function() {
+      var _this = this;
+      return this.map.ease.location({
+        lat: 37.734,
+        lon: 15.004
+      }).zoom(10).optimal(0.9, 1.42, function() {
+        $("#map-legend").html(_this.teaserHtml);
+        etna.eruptionsChart.drawBarchart(etna.eruptions);
+        return _this.toggleLegend();
       });
-      return this.displayLegend(newContent);
-    },
-    displayLegend: function(html) {
-      var $legend;
-      $legend = $("#map-legend");
-      if (!$legend.is(":visible")) {
-        $legend.html(html).slideToggle();
-        return $("#map-legend-teaser").slideToggle();
-      } else {
-        return $legend.html(html);
-      }
     },
     showRegion: function(region) {
-      var location, zoom,
-        _this = this;
-      if (region === "map") {
-        return this.map.ease.location({
-          lat: 37.734,
-          lon: 15.004
-        }).zoom(10).optimal(0.9, 1.42, function() {
-          $("#map-legend").html(_this.teaserHtml);
-          etna.eruptionsChart.drawBarchart(etna.eruptions);
-          return _this.toggleLegend();
-        });
-      } else {
-        location = etna.towns[region].location;
-        this.displayRegionLegend(region);
-        zoom = 12;
-        if (zoom !== this.map.zoom()) {
-          regionZoom = true;
-        }
-        return this.map.ease.location(location).zoom(zoom).optimal();
+      var location, zoom;
+      location = etna.towns[region].location;
+      zoom = 12;
+      if (zoom !== this.map.zoom()) {
+        regionZoom = true;
       }
+      return this.map.ease.location(location).zoom(zoom).optimal();
     }
   };
 })();

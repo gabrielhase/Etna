@@ -34,7 +34,7 @@ div{
 #sentiment {
     background:lightgray;
     position:absolute;
-    top:570px;
+    top:150px;
     left:250px;
     width:500px;
     height:150px;
@@ -140,7 +140,8 @@ div{
 
     display: inline-block;
     position:absolute;
-    bottom:0;
+    left: 5px;
+    top: 100px;
 
 }
 
