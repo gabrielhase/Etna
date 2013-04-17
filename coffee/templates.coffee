@@ -19,7 +19,7 @@
       <img src="<%= imageurl %>" class="img-left" height="120">
       <i>Population: <%= population %></i>
     </div>
-    <div class="map-legend-left">
+    <div class="town-description">
       <h3><%= title %></h3>
       <p>
         <%= teaser %>

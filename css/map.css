@@ -4,6 +4,7 @@ body {
   margin:0;
   padding:0;
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
 }
 
 #map-container {
@@ -105,16 +106,13 @@ ul.legend li span {
   padding: 5px 10px;
 }
 
-.map-legend-left {
-  float: left;
-  width: 70%;
+.town-description {
   overflow: auto;
   max-height: 250px;
 }
 
-.map-legend-left p {
-  font-size: 15px !important;
-  line-height: 22px !important;
+.town-description p {
+  font-size: 12px !important;
 }
 
 .legend-close-link {
