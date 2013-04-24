@@ -13,14 +13,18 @@
     <script src="js/vendor/mapbox.js"></script>
     <!-- Templating -->
     <script src="js/vendor/underscore.js"></script>
+    <script src="js/vendor/vega.js"></script>
 
     <script src="js/templates.js"></script>
     <script src="js/eruptions.js"></script>
     <script src="js/d3layer.js"></script>
     <script src="js/map.js"></script>
     <script src="js/towns.js"></script>
+    <script src="js/vega-line-chart.js"></script>
+
     <script src="js-sebastian/tweets.js"></script>
     <script src="js-sebastian/sentiment.js"></script>
+
   </head>
 
   <body class="container">
@@ -43,6 +47,7 @@
         </p>
       </div>
     </div>
+
     <br/>
     <br/>
     <div class="row">
@@ -92,7 +97,9 @@
       </div>
       <div class="clearfix"></div>
       <div class="span7" style="margin-top: 20px">
-        TODO: Text about Etna today
+        <p>TODO: Text about Etna today</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, voluptate, perspiciatis voluptates eligendi rem quidem modi culpa numquam inventore facilis expedita error deserunt mollitia. Quae, nostrum laboriosam incidunt pariatur illo.</p>
+        <object data="http://images.nationalgeographic.com/wpf/sites/video/swf/ngplayer_v2.5.swf" type="application/x-shockwave-flash" width="500" height="307" seamlesstabbing="false" allowfullsecreen="true" id="ngplayer" name="flashObj"><param name="movie" value="http://images.nationalgeographic.com/wpf/sites/video/swf/ngplayer_v2.5.swf"><param name="allowscriptaccess" value="always"><param name="allowfullscreen" value="true"><param name="scale" value="noscale"><param name="wmode" value="opaque"><param name="menu" value="false"><param name="quality" value="best"><param name="bgcolor" value="#000000"><param name="name" value="ngplayer"><param name="flashvars" value="adenabled=&amp;adprogramid=4a67dd6268de7&amp;caption=%3Cp%3EEurope's%20highest%20active%20volcano%20shadows%20several%20towns.%20Tied%20to%20the%20mountain%20by%20tradition%20and%20history,%20for%20some,%20it%20would%20be%20inconceivable%20to%20live%20anywhere%20else.%3C/p%3E&amp;img=http://video.nationalgeographic.com/exposure/transcode/1/610/343/?url=http://video.nationalgeographic.com/video/player/media/mt-etna-volcanologist/mt-etna-volcanologist_480x360.jpg&amp;permalink=/video/environment/environment-natural-disasters/volcanoes/mt-etna-volcanologist/&amp;share=false&amp;restricted=false&amp;autoplay=false&amp;siteid=syndicatedplayer&amp;slug=http://video.nationalgeographic.com/video/player/data/xml/mt-etna-volcanologist.smil&amp;vtitle=Mt.%20Etna%20Volcanologist&amp;cuepoints=&amp;vwidth=500&amp;vheight=307&amp;"><video id="ngplayer" src="http://video.nationalgeographic.com/video/player/media-mp4/mt-etna-volcanologist/mp4/variant-playlist.m3u8" controls="controls" autoplay="autoplay" width="610" height="375" poster="http://video.nationalgeographic.com/exposure/transcode/1/610/343/?url=http://video.nationalgeographic.com/video/player/media/mt-etna-volcanologist/mt-etna-volcanologist_480x360.jpg" style="background-color:#000;"></video></object>
       </div>
       <div class="span5" style="margin-top: 20px">
         <div class="alert alert-info">
@@ -153,7 +160,7 @@
           window.location = 'http://eye-on-etna.herokuapp.com/'
         }
 
-        d3.json('data/towns.json', function(error, towns) {
+        d3.json('data/towns-with-census.json', function(error, towns) {
           if (error) {
             console.log(error);
           }
@@ -165,7 +172,14 @@
             }
             // init the map
             etna.map.init(towns, eruptions);
-            etna.townsExplorer.init(towns);
+
+            // init the towns
+            vg.parse.spec(etna.lineChart.chart, function(chart) {
+              //lineChart = chart({el: "#vis", renderer: "svg"});
+              etna.townsExplorer.init(towns, chart);
+              //lineChart.update();
+            });
+
           });
         });
         // init the sentiment chart

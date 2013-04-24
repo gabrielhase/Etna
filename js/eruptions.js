@@ -67,14 +67,16 @@ this.etna.eruptionsChart = (function() {
       return _results;
     },
     drawBarchart: function(eruptionData) {
-      var barchartGroup, bars, svg;
-      svg = d3.select("#map-legend").append("svg").attr('class', 'barchart').attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      var barchartGroup, bars, svg, svg_container;
+      svg_container = d3.select("#map-legend").append("svg").attr('class', 'barchart').attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
+      svg = svg_container.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
       x.domain(d3.extent(_this.sanitizedData, function(d) {
         return d.date;
       }));
       y.domain(d3.extent(_this.sanitizedData, function(d) {
         return d.vei;
       }));
+      svg_container.append('text').attr('class', 'y label').attr('text-anchor', 'end').attr('x', 30).attr('y', height - margin.top - margin.bottom).text('VEI');
       svg.append('g').attr('class', 'x axis').attr('transform', 'translate(0,' + height + ')').call(xAxis);
       svg.append('g').attr('class', 'y axis').call(yAxis);
       svg.selectAll('rect').data(_this.sanitizedData).enter().append('rect').attr('x', function(d, i) {

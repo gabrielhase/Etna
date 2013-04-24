@@ -6,9 +6,10 @@ this.etna.townsExplorer = (function() {
   templates = this.etna.templates;
   townsData = void 0;
   return {
-    init: function(townsDataIn) {
+    init: function(townsDataIn, chartComponent) {
       townsData = townsDataIn;
       etna.towns = townsDataIn.towns;
+      this.chartComponent = chartComponent;
       return this.initEvents();
     },
     initEvents: function() {
@@ -43,7 +44,27 @@ this.etna.townsExplorer = (function() {
         imageurl: regionData.imageurl,
         population: regionData.population
       });
-      return $("#towns-explorer").html(regionContent);
+      $("#towns-explorer").html(regionContent);
+      return this.drawTownsPopulationChart(region);
+    },
+    drawTownsPopulationChart: function(region) {
+      var data, population, regionData, year, _ref;
+      regionData = etna.towns[region];
+      data = {};
+      data["table"] = [];
+      _ref = regionData['census'];
+      for (year in _ref) {
+        population = _ref[year];
+        data["table"].push({
+          "year": year,
+          "population": population
+        });
+      }
+      return this.chartComponent({
+        el: "#vis",
+        data: data,
+        renderer: "svg"
+      }).update();
     }
   };
 })();

@@ -135,7 +135,7 @@
     #@displayRegionLegend(region)
 
     # center region
-    zoom = 12
+    zoom = 11
     regionZoom = true if zoom != @map.zoom()
     @map.ease.location(location).zoom(zoom).optimal()
 

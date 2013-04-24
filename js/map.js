@@ -103,7 +103,7 @@ this.etna.map = (function() {
     showRegion: function(region) {
       var location, zoom;
       location = etna.towns[region].location;
-      zoom = 12;
+      zoom = 11;
       if (zoom !== this.map.zoom()) {
         regionZoom = true;
       }

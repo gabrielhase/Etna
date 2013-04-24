@@ -63,11 +63,12 @@
 
 
   drawBarchart: (eruptionData) =>
-    svg = d3.select("#map-legend").append("svg")
+    svg_container = d3.select("#map-legend").append("svg")
       .attr('class', 'barchart')
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
-      .append("g")
+
+    svg = svg_container.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
     x.domain(d3.extent(@sanitizedData, (d) ->
@@ -76,6 +77,13 @@
     y.domain(d3.extent(@sanitizedData, (d) ->
       d.vei
     ))
+
+    svg_container.append('text')
+      .attr('class', 'y label')
+      .attr('text-anchor', 'end')
+      .attr('x', 30)
+      .attr('y', height - margin.top - margin.bottom)
+      .text('VEI')
 
     svg.append('g')
       .attr('class', 'x axis')
