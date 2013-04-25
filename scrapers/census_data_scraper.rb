@@ -3,7 +3,7 @@ require 'json'
 
 require_relative 'census_data'
 
-OUTPUT_FILE = "towns-with-census2.json"
+OUTPUT_FILE = "towns-with-census.json"
 
 # get a mechanize client
 def get_mechanize_client
@@ -21,6 +21,10 @@ if __FILE__ == $PROGRAM_NAME
   towns = JSON.parse(IO.read("../../data/towns.json"))
   towns["towns"].each do |name, data|
     census_data_getter.scrape(name)
+  end
+
+  File.open("census-data.json","w") do |f|
+    f.write(census_data_getter.census_data.to_json)
   end
 
   census_data_getter.interpolate_linearly()

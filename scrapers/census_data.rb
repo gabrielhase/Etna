@@ -89,7 +89,7 @@ class CensusData
           step = value_diff / time_diff
           n = 1
           (last_year+1..year-1).each do |interpolated_year|
-            interpolated_data[name][interpolated_year] = value + n*step
+            interpolated_data[name][interpolated_year] = last_value + n*step
             n += 1
           end
         end

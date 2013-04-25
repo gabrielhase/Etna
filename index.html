@@ -166,7 +166,7 @@
           }
           // init the towns navigation
           $("#towns-explorer").html(etna.templates.townsNavigation(towns));
-          d3.json('data/etna-history2.json', function(error, eruptions) {
+          d3.json('data/etna-history-with-events.json', function(error, eruptions) {
             if (error) {
               console.log(error);
             }
@@ -175,11 +175,8 @@
 
             // init the towns
             vg.parse.spec(etna.lineChart.chart, function(chart) {
-              //lineChart = chart({el: "#vis", renderer: "svg"});
               etna.townsExplorer.init(towns, chart);
-              //lineChart.update();
             });
-
           });
         });
         // init the sentiment chart
