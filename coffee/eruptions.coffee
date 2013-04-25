@@ -2,11 +2,15 @@
 
 @etna.eruptionsChart = do ->
 
+  airportLocations = {
+    "catania": [15.0659, 37.4704]
+  }
+
   craterLocations = {
-    "NorthEast": [15.0636, 37.7516],
-    "SouthEast": [15.0742, 37.7098],
-    "Voragine": [15.0677, 37.7305],
-    "Bocca Nuova": [15.0197, 37.7256]
+    "NorthEast": {"lon": 15.0636, "lat": 37.7516},
+    "SouthEast": {"lon": 15.0742, "lat": 37.7098},
+    "Voragine": {"lon": 15.0677, "lat": 37.7305},
+    "Bocca Nuova": {"lon": 15.0197, "lat": 37.7256}
   }
 
   boundingBox = {"type": "FeatureCollection", "features": [
@@ -60,6 +64,9 @@
         'vei': +eruptionData[eruption].vei
         'craters': eruptionData[eruption].craters
         'ash': eruptionData[eruption].ash
+        'airportShutdown': eruptionData[eruption].airportShutdown
+        'destroyed': eruptionData[eruption].destroyed
+        'earthquake': eruptionData[eruption].earthquake
 
 
   drawBarchart: (eruptionData) =>
@@ -145,6 +152,9 @@
 
     craterExplosions = {}
     ashFalls = {}
+    airportShutdowns = {}
+    destroyed = {}
+    earthquakes = {}
     for datum in dataFiltered
       for crater in datum.craters
         craterExplosions[crater] ||= []
@@ -152,15 +162,28 @@
       for town in datum.ash
         ashFalls[town] ||= []
         ashFalls[town].push(datum.date.getFullYear())
+      if datum.airportShutdown
+        for airport in datum.airportShutdown
+          airportShutdowns[airport] ||= []
+          airportShutdowns[airport].push(datum.date.getFullYear())
+      if datum.destroyed
+        for destroyedTown in datum.destroyed
+          destroyed[destroyedTown] ||= []
+          destroyed[destroyedTown].push(datum.date.getFullYear())
+      if datum.earthquake
+        for earthquakeTown in datum.earthquake
+          earthquakes[earthquakeTown] ||= []
+          earthquakes[earthquakeTown].push(datum.date.getFullYear())
 
     @markerLayer.features([])
     for craterName of craterExplosions
       tooltipTitle = "Explosion at crater #{craterName}"
       tooltipText = craterExplosions[craterName].join(', ')
+      location = craterLocations[craterName]
 
       @markerLayer.add_feature
         geometry:
-          coordinates: craterLocations[craterName]
+          coordinates: [location.lon, location.lat]
         properties:
           'marker-color': '#993341'
           'marker-symbol': 'minefield'
@@ -174,11 +197,54 @@
       if location
         @markerLayer.add_feature
           geometry:
-            coordinates: [location.lon, location.lat]
+            coordinates: [location.lon-0.01, location.lat-0.01] # sightly offset for overlaying pins
           properties:
             'marker-color': '#777'
             'marker-symbol': 'star-stroked'
             title: "#{tooltipTitle} in #{tooltipText}"
+
+    for airportName of airportShutdowns
+      tooltipTitle = "Airport #{airportName} was shut down"
+      tooltipText = airportShutdowns[airportName].join(', ')
+      location = airportLocations[airportName]
+      if location
+        @markerLayer.add_feature
+          geometry:
+            coordinates: location
+          properties:
+            'marker-color': '#387FA8'
+            'marker-symbol': 'airport'
+            title: "#{tooltipTitle} in #{tooltipText}"
+
+    for destroyedTown of destroyed
+      tooltipTitle = "#{destroyedTown} was destroyed in "
+      tooltipText = destroyed[destroyedTown].join(', ')
+      location = etna.towns[destroyedTown]?.location
+      if location
+        @markerLayer.add_feature
+          geometry:
+            coordinates: [location.lon+0.01, location.lat+0.01] # slightly offset for overlaying pins
+          properties:
+            'marker-color': '#000'
+            'marker-symbol': 'cross'
+            title: "#{tooltipTitle} in #{tooltipText}"
+
+    for earthquake of earthquakes
+      tooltipTitle = "An earthquake triggered by an eruption was in #{earthquake} "
+      tooltipText = earthquakes[earthquake].join(', ')
+      location = etna.towns[earthquake]?.location
+      location||= craterLocations[earthquake]
+      if location
+        @markerLayer.add_feature
+          geometry:
+            coordinates: [location.lon-0.01, location.lat+0.01] # slightly offset for overlaying pins
+          properties:
+            'marker-color': '#5C461F'
+            'marker-symbol': 'e'
+            title: "#{tooltipTitle} in #{tooltipText}"
+
+
+
 
     # make sure z-index of markers is good
     $('.simplestyle-marker').parent().attr('class', 'markers')

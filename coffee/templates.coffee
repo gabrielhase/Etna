@@ -6,9 +6,9 @@
     """
     <h4>Towns around Mount Etna</h4>
     <p>Select a town to get more details and use the eruption selection on the map to see what happened there.</p>
-    <ul>
+    <ul class="no-list towns-list">
     <% for ( var town in towns ) { %>
-      <li><a href="" class="region-link" data-region="<%= town %>"><%= towns[town].name %></a></li>
+      <li><a href="" class="region-link" data-region="<%= town %>"><%= towns[town].name %>&nbsp;»</a></li>
     <% } %>
     </ul>
     """

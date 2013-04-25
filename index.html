@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/barchart.css">
     <link rel="stylesheet" href="css/sentiment.css">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/story.css">
 
     <script src="js/vendor/d3.v3.js"></script>
     <script src="js/vendor/jquery-1.9.1.js"></script>
@@ -14,6 +15,7 @@
     <!-- Templating -->
     <script src="js/vendor/underscore.js"></script>
     <script src="js/vendor/vega.js"></script>
+    <script src="js/vendor/scrollspy.js"></script>
 
     <script src="js/templates.js"></script>
     <script src="js/eruptions.js"></script>
@@ -28,129 +30,210 @@
   </head>
 
   <body class="container">
-    <div class="row">
-      <div class="span12">
-        <div class="hero-unit">
-          <h1>Mount Etna</h1>
-          <p>Curse or Attraction?</p>
+    <div id="etna-navbar" class="navbar navbar-static" style="position: fixed; width: 960px; z-index: 10000;">
+      <div class="navbar-inner">
+        <div class="container" style="width: auto;">
+          <a class="brand" href="#">Mt. Etna</a>
+          <ul class="nav">
+            <li class="active"><a href="#intro">Introduction</a></li>
+            <li class=""><a href="#tourism">Tourism</a></li>
+            <li class=""><a href="#effects">Effects</a></li>
+            <li class=""><a href="#life">Life</a></li>
+            <li class=""><a href="#etna-map">Explorer</a></li>
+          </ul>
         </div>
-        <p>In 1923 the newspaper The Economist writes a parallel of an eruption of Mount Etna with the tense political situation in Europe due to the reparation payments of Germany and the glooming economic downfall (see excerpt below). Only five years later, in 1928, Mount Etna has another major eruption completely destroying the town of Mascali. In the following rebuilding works, Mussolini and his National Facist Party could foster their position in Sicily and spread national socialism.</p>
-        <div class="thumbnail">
-          <img src="img/economist-article-1923.png">
-          <div class="caption">
-            Excerpt from an article from the newspaper The Economist from 1923<br/> <small>Copyright 1923, The Economist Newspaper Limited</small>
-          </div>
-        </div>
-        <br/>
-        <p>
-          This story shows that the volcano Mount Etna is more than just ash and lava. Volcanoes play a vital role in the life and development of cultures that settle around them. The intention of this article is to show how Mount Etna affects the people living in the small idyllic towns at the slopes of the volcano and how our generation perceives Mount Etna. Under the headline «Curse or Attraction» the balancing act is shown of a Mount Etna that is a threat to life and property and a worthwhile tourist attraction at the same time.
-        </p>
       </div>
     </div>
 
-    <br/>
-    <br/>
-    <div class="row">
-      <div class="span12">
-        <h2>Living around Etna</h2>
-        <p>TODO: introduce the visualization</p>
-      </div>
+    <div data-spy="scroll" data-target="#etna-navbar" data-offset="0" class="scrollspy-example" id="story">
 
-      <div class="span8" style="position: relative; height: 500px">
-        <div id="map-container">
-          <div id='map'>
+      <div class="row" id="intro">
+        <div class="span12">
+          <div class="hero-unit">
+            <h1>Mount Etna</h1>
+            <p>Curse or Attraction?</p>
           </div>
-
-          <div id="map-regions">
-            <div class="corner">
-              <a href="" class="home-link image-link" data-region="map">
-                <img src="img/volcano_icon.png" alt="Region Etna" width="47" style="border-bottom: 1px solid #eee" />
-                <span style="position:absolute; top: 15px; left: 50px;">To Etna</span>
-              </a>
-            </div>
-
-            <div class="content">
-              <hr>
-              <ul class="legend">
-                <li><img src="img/plume_icon.png" width="15" height="15" /> <span>Plume Area</span></li>
-                <li><img src="img/explosion_icon.png" width="15" height="15" /> <span>Explosion</span></li>
-                <li><img src="img/ash_icon.png" width="15" height="15" /> <span>Ashfall</span></li>
-              </ul>
+          <p>In 1923 the newspaper The Economist writes a parallel of an eruption of Mount Etna with the tense political situation in Europe due to the reparation payments of Germany and the glooming economic downfall (see excerpt below). Only five years later, in 1928, Mount Etna has another major eruption completely destroying the town of Mascali. In the following rebuilding works, Mussolini and his National Facist Party could foster their position in Sicily and spread national socialism.</p>
+          <div class="thumbnail">
+            <img src="img/economist-article-1923.png">
+            <div class="caption">
+              Excerpt from an article from the newspaper The Economist from 1923<br/> <small>Copyright 1923, The Economist Newspaper Limited</small>
             </div>
           </div>
-
-          <div id="map-legend" class="transparent">
-            <h4>Eruptions at Mt. Etna<small>&nbsp;Use the mouse to select</small></h4>
-            <a class="close-map-legend legend-close-link" href="">x</a>
-          </div>
-
-          <div id="map-legend-teaser" style="display:none">
-            <a href="" class="open-map-legend">All volcano eruptions</a>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="span4">
-        <div id="towns-explorer">
-        </div>
-      </div>
-      <div class="clearfix"></div>
-      <div class="span7" style="margin-top: 20px">
-        <p>TODO: Text about Etna today</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, voluptate, perspiciatis voluptates eligendi rem quidem modi culpa numquam inventore facilis expedita error deserunt mollitia. Quae, nostrum laboriosam incidunt pariatur illo.</p>
-        <object data="http://images.nationalgeographic.com/wpf/sites/video/swf/ngplayer_v2.5.swf" type="application/x-shockwave-flash" width="500" height="307" seamlesstabbing="false" allowfullsecreen="true" id="ngplayer" name="flashObj"><param name="movie" value="http://images.nationalgeographic.com/wpf/sites/video/swf/ngplayer_v2.5.swf"><param name="allowscriptaccess" value="always"><param name="allowfullscreen" value="true"><param name="scale" value="noscale"><param name="wmode" value="opaque"><param name="menu" value="false"><param name="quality" value="best"><param name="bgcolor" value="#000000"><param name="name" value="ngplayer"><param name="flashvars" value="adenabled=&amp;adprogramid=4a67dd6268de7&amp;caption=%3Cp%3EEurope's%20highest%20active%20volcano%20shadows%20several%20towns.%20Tied%20to%20the%20mountain%20by%20tradition%20and%20history,%20for%20some,%20it%20would%20be%20inconceivable%20to%20live%20anywhere%20else.%3C/p%3E&amp;img=http://video.nationalgeographic.com/exposure/transcode/1/610/343/?url=http://video.nationalgeographic.com/video/player/media/mt-etna-volcanologist/mt-etna-volcanologist_480x360.jpg&amp;permalink=/video/environment/environment-natural-disasters/volcanoes/mt-etna-volcanologist/&amp;share=false&amp;restricted=false&amp;autoplay=false&amp;siteid=syndicatedplayer&amp;slug=http://video.nationalgeographic.com/video/player/data/xml/mt-etna-volcanologist.smil&amp;vtitle=Mt.%20Etna%20Volcanologist&amp;cuepoints=&amp;vwidth=500&amp;vheight=307&amp;"><video id="ngplayer" src="http://video.nationalgeographic.com/video/player/media-mp4/mt-etna-volcanologist/mp4/variant-playlist.m3u8" controls="controls" autoplay="autoplay" width="610" height="375" poster="http://video.nationalgeographic.com/exposure/transcode/1/610/343/?url=http://video.nationalgeographic.com/video/player/media/mt-etna-volcanologist/mt-etna-volcanologist_480x360.jpg" style="background-color:#000;"></video></object>
-      </div>
-      <div class="span5" style="margin-top: 20px">
-        <div class="alert alert-info">
-          <i class="icon-info-sign"></i>
-          <h3>Explosivity Index (VEI)</h3>
+          <br/>
           <p>
-            The volcanic Explosivity Index, short VEI, was devised to provide a relative measure of the explosiveness of volcanic eruptions. Volume of products, eruption cloud height, and qualitative observations (using terms ranging from "gentle" to "mega-colossal") are used to determine the explosivity value. The scale is open-ended with the largest volcanoes in history given magnitude 8. A value of 0 is given for non-explosive eruptions. The scale is logarithmic, with each interval on the scale representing a tenfold increase in observed ejecta criteria, with the exception between 0 and 2.
-          </p>
-          <p>
-            The VEI can not directly be used to measure the impact of an eruption on people. While most destruction around Etna was caused by lava, this is not measured in the VEI at all. There is a measure for the plume of an eruption according to different values of the VEI, but the relation is rather weak and inprecise. The VEI is still the most used index to measure volcanic eruptions and the only index that is widely available.
+            This story shows that the volcano Mount Etna is more than just ash and lava. Volcanoes play a vital role in the life and development of cultures that settle around them. The intention of this article is to show how Mount Etna affects the people living in the small idyllic towns at the slopes of the volcano and how our generation perceives Mount Etna. Under the headline «Curse or Attraction» the balancing act is shown of a Mount Etna that is a threat to life and property and a worthwhile tourist attraction at the same time.
           </p>
         </div>
       </div>
-    </div>
-    <div class="clearfix"></div>
-    <div class="row" style="position:relative; height: 400px">
-      <h2>Etna as a tourist attraction</h2>
-      <p>TODO: text about volcano travelling and Etna tours.</p>
-      <div id="sentiment">
-        <div id="legend">
-          <div id="neg_legend"><strong>negative</strong></div>
-          <div id="neu_legend"><strong>neutral</strong></div>
-          <div id="pos_legend"><strong>positive</strong></div>
-        </div>
 
-        <div id="scale_nr">
-          <div id="_nr"><strong>nr</strong></div>
-          <div id="negative_nr"><strong></strong></div>
-          <div id="neutral_nr"><strong></strong></div>
-          <div id="positive_nr"><strong></strong></div>
-        </div>
-
-        <div id="svgContainer" onmousemove="etna.sentimentChart.myMM(event);" onmouseout="etna.sentimentChart.hideTooltip();"></div>
-
-        <div id="scale">
-          <div id="nr"><strong>nr</strong></div>
-          <div id="negative"><strong></strong></div>
-          <div id="neutral"><strong></strong></div>
-          <div id="positive"><strong></strong></div>
-        </div>
-
-        <div id="choice">
-          <input type="checkbox" id="chkbx" name="list" value="1">colorblind friendly colorscheme<br></input>
-          <div id="drpdwn"></div>
+      <div class="row" id="tourism">
+        <div class="span12">
+          <h2>Etna as a tourist attraction</h2>
+          <p>Almost a century later there are thousands of people hoping for the next lava streams coming out of Mt. Etna: Volcano Tourists.</p>
+          <p>TODO: text about volcano travelling and Etna tours.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, quia, consectetur, fugit totam cupiditate magni a ipsam officiis nemo maiores fugiat natus quam! Nemo, suscipit ut quisquam voluptates sit eum!</p>
         </div>
       </div>
-      <div id="tooltip" class="Invisible"></div>
-    </div>
 
-    <div class="row">
-      <p>TODO: closing comments</p>
+      <div class="row" id="effects">
+        <div class="span7">
+          <h2>Effects of a volcano</h2>
+          <h3>Plume</h3>
+          <p>
+            The plume of a volcano is its eruption column. It consists of hot volcanic ash emitted during an explosive volcanic eruption. The ash forms a column rising many kilometres into the air above the peak of the volcano. In the most explosive eruptions, the eruption column may rise over 40 km, penetrating the stratosphere. Stratospheric injection of aerosols by volcanoes is a major cause of short-term climate change.
+          </p>
+          <h3>Explosions</h3>
+          <p>
+            An explosive eruption is a volcanic term to describe a violent, explosive type of eruption. Mount St. Helens in 1980 was an example. Such an eruption is driven by gas accumulating under great pressure. Driven by hot rising magma, it interacts with ground water until the pressure increases to the point at which it bursts violently through the over mantle of rock. In many cases, the rising magma will contain large quantities of partially dissolved gas. Sometimes a lava plug will block the conduit to the summit, and when this occurs, eruptions are more violent. With the sudden release of pressure following the initial explosion, the gas comes out of solution violently and explosively. This secondary explosion is often far more violent than the first one; the rocks, dust, gas and pyroclastic material may be blown 20 km into the atmosphere at rate of up to 100,000 tonnes per second, traveling at several hundred metres per second. This cloud will then collapse, creating a pyroclastic flow of hot volcanic matter.
+          </p>
+          <h3>Ash</h3>
+          <p>
+            Volcanic ash consists of fragments of pulverized rock, minerals and volcanic glass, created during volcanic eruptions, less than 2 mm (0.079 in) in diameter. Volcanic ash is formed during explosive volcanic eruptions when dissolved gases in magma expand and escape violently into the atmosphere. The force of the escaping gas shatters the magma and propels it into the atmosphere where it solidifies into fragments of volcanic rock and glass. Ash is also produced when magma comes into contact with water during phreatomagmatic eruptions, causing the water to explosively flash to steam leading to shattering of magma. Once in the air, ash is transported by wind up to thousands of kilometers away.
+          </p>
+          <h3>Airport Shutdowns</h3>
+          <p>
+            If an eruption has a lot of ash emissions airports nearby have to be shutdown because of the risk to fly through the ash filled airspace. In April 2010, when Iceland’s Eyjafjallajokull volcano erupted, air traffic all but ceased over Europe as controllers worried about the effects of volcanic ash on the engines of a plane.<br/>
+            Volcanic ash affects aircrafts in a variety of ways. Firstly, the ash has a sandblasting effect on any aircraft, with the billions of particles colliding with its fuselage and damaging its landing lights and main body. Secondly, ash can clog many of the aircraft’s sensors, such as the pitot tubes (pressure measurement) and, because the ash’s particles are charged, communication radios. Thirdly, and potentially with the worst consequences, ash can cause combustion power failure, leaving the plane with no engine thrust and minimal chance of landing without a catastrophic crash.
+          </p>
+          <h3>Earthquakes</h3>
+          <p>
+            A volcano tectonic earthquake is an earthquake induced by the movement (injection or withdrawal) of magma. The movement results in pressure changes in the rock around where the magma has experienced stress. At some point, the rock may break or move. The earthquakes may also be related to dike intrusion and may occur as earthquake swarms. Other types of seismic activity related to volcanoes and their eruptions are long period seismic waves, which are from sudden sporadic movement of magma, which is blocked from moving due to a blockage. Another is a harmonic tremor, which is steady movement of magma, deep in the mantle.
+          </p>
+
+          <h3>Destruction</h3>
+          <p>
+            In rare and tragic cases whole towns or areas are destroyed due to volcanic eruptions. Probably the most known destruction is the Minoan eruption on the island of Santorini. It is believed by some historians that the island was much larger and in fact known as Atlantis. Most of Atlantis was destroyed by the explosive eruption and only what we know today as the greek island of Santorini remained. The explosion also triggered a Tsunami which reached the island of Crete and destroyed the Minoan culture there.<br/>
+            The last destruction by Mount Etna was the town of Mascali in 1928.
+          </p>
+        </div>
+        <div class="span4 offset1" style="margin-top: 20px">
+          <br/>
+          <div class="thumbnail">
+            <span>
+              <img src="img/etna-plume.jpg">
+            </span>
+            <div class="caption">
+              <em>Etna's plume after an eruption in 2001</em>
+            </div>
+          </div>
+          <div class="thumbnail">
+            <span>
+              <img src="img/etna-explosion.jpg">
+            </span>
+            <div class="caption">
+              <em>Etna exploding in 2013 with lava fountains, lava bubbles, and ash</em>
+            </div>
+          </div>
+          <div class="thumbnail">
+            <span>
+              <img src="img/etna-ash.jpg">
+            </span>
+            <div class="caption">
+              <em>The town Zafferana Etnea covered in ash after an eruption in 2013</em>
+            </div>
+          </div>
+          <div class="thumbnail">
+            <span>
+              <img src="img/etna-earthquake.jpg">
+            </span>
+            <div class="caption">
+              <em>The town Messina was almost completely destroyed by an earthquake in 1908 that followed an eruption.</em>
+            </div>
+          </div>
+          <div class="thumbnail">
+            <span>
+              <img src="img/mascali_destruction.jpg">
+            </span>
+            <div class="caption">
+              <em>The town Mascali was destroyed by lava streams in 1928.</em>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <div class="row" id="life">
+        <div class="span7" style="margin-top: 20px">
+          <h2>Living around Etna</h2>
+          <p>TODO: Text about Etna today</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, voluptate, perspiciatis voluptates eligendi rem quidem modi culpa numquam inventore facilis expedita error deserunt mollitia. Quae, nostrum laboriosam incidunt pariatur illo.</p>
+          <object data="http://images.nationalgeographic.com/wpf/sites/video/swf/ngplayer_v2.5.swf" type="application/x-shockwave-flash" width="500" height="307" seamlesstabbing="false" allowfullsecreen="true" id="ngplayer" name="flashObj"><param name="movie" value="http://images.nationalgeographic.com/wpf/sites/video/swf/ngplayer_v2.5.swf"><param name="allowscriptaccess" value="always"><param name="allowfullscreen" value="true"><param name="scale" value="noscale"><param name="wmode" value="opaque"><param name="menu" value="false"><param name="quality" value="best"><param name="bgcolor" value="#000000"><param name="name" value="ngplayer"><param name="flashvars" value="adenabled=&amp;adprogramid=4a67dd6268de7&amp;caption=%3Cp%3EEurope's%20highest%20active%20volcano%20shadows%20several%20towns.%20Tied%20to%20the%20mountain%20by%20tradition%20and%20history,%20for%20some,%20it%20would%20be%20inconceivable%20to%20live%20anywhere%20else.%3C/p%3E&amp;img=http://video.nationalgeographic.com/exposure/transcode/1/610/343/?url=http://video.nationalgeographic.com/video/player/media/mt-etna-volcanologist/mt-etna-volcanologist_480x360.jpg&amp;permalink=/video/environment/environment-natural-disasters/volcanoes/mt-etna-volcanologist/&amp;share=false&amp;restricted=false&amp;autoplay=false&amp;siteid=syndicatedplayer&amp;slug=http://video.nationalgeographic.com/video/player/data/xml/mt-etna-volcanologist.smil&amp;vtitle=Mt.%20Etna%20Volcanologist&amp;cuepoints=&amp;vwidth=500&amp;vheight=307&amp;"><video id="ngplayer" src="http://video.nationalgeographic.com/video/player/media-mp4/mt-etna-volcanologist/mp4/variant-playlist.m3u8" controls="controls" autoplay="autoplay" width="610" height="375" poster="http://video.nationalgeographic.com/exposure/transcode/1/610/343/?url=http://video.nationalgeographic.com/video/player/media/mt-etna-volcanologist/mt-etna-volcanologist_480x360.jpg" style="background-color:#000;"></video></object>
+        </div>
+
+        <div class="span5" style="margin-top: 20px">
+
+          <div class="alert alert-info">
+            <i class="icon-info-sign"></i>
+            <h3>Explosivity Index (VEI)</h3>
+            <p>
+              The volcanic Explosivity Index, short VEI, was devised to provide a relative measure of the explosiveness of volcanic eruptions. Volume of products, eruption cloud height, and qualitative observations (using terms ranging from "gentle" to "mega-colossal") are used to determine the explosivity value. The scale is open-ended with the largest volcanoes in history given magnitude 8. A value of 0 is given for non-explosive eruptions. The scale is logarithmic, with each interval on the scale representing a tenfold increase in observed ejecta criteria, with the exception between 0 and 2.
+            </p>
+            <p>
+              The VEI can not directly be used to measure the impact of an eruption on people. While most destruction around Etna was caused by lava, this is not measured in the VEI at all.
+              The VEI is still the most used index to measure volcanic eruptions and the only index that is widely available.
+            </p>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <div class="row" id="etna-map">
+        <div class="span12">
+          <h2>Interactive map</h2>
+        </div>
+
+        <div class="span8" style="position: relative; height: 500px">
+          <div id="map-container">
+            <div id='map'>
+            </div>
+
+            <div id="map-regions">
+              <div class="corner">
+                <a href="" class="home-link image-link" data-region="map">
+                  <img src="img/volcano_icon.png" alt="Region Etna" width="47" />
+                  <span style="position:absolute; top: 10px; left: 50px; color: #0088cc">Etnas Crater</span>
+                </a>
+              </div>
+
+              <div class="content">
+                <hr style="margin: 0">
+                <small>Legend</small>
+
+
+                <ul class="legend">
+                  <li><img src="img/plume_icon.png" width="15" height="15" /> <span>Plume Area</span></li>
+                  <li><img src="img/explosion_icon.png" width="15" height="15" /> <span>Explosion</span></li>
+                  <li><img src="img/ash_icon.png" width="15" height="15" /> <span>Ashfall</span></li>
+                  <li><img src="img/airport_icon.png" width="15" height="15" /> <span>Airport Shutdown</span></li>
+                  <li><img src="img/destruction_icon.png" width="15" height="15" /> <span>Destroyed Town</span></li>
+                  <li><img src="img/earthquake_icon.png" width="15" height="15" /> <span>Earthquake</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div id="map-legend" class="transparent">
+              <h4>Eruptions at Mt. Etna<small>&nbsp;Use the mouse to select</small></h4>
+              <a class="close-map-legend legend-close-link" href="">x</a>
+            </div>
+
+            <div id="map-legend-teaser" style="display:none">
+              <a href="" class="open-map-legend">All volcano eruptions</a>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="span4">
+          <div id="towns-explorer">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <p>TODO: closing comments</p>
+      </div>
+
     </div>
 
     <script>
@@ -176,6 +259,9 @@
             // init the towns
             vg.parse.spec(etna.lineChart.chart, function(chart) {
               etna.townsExplorer.init(towns, chart);
+
+              // init scrollspy
+              $('body').scrollspy();
             });
           });
         });

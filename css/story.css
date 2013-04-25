@@ -1,0 +1,27 @@
+.thumbnail {
+  margin: 10px 0;
+}
+
+.no-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.towns-list li {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.towns-list li:hover {
+  background-color: #E0A3AA;
+
+}
+
+.towns-list li:hover a {
+  color: #fff;
+}
+
+.towns-list li:first-child {
+  border-top: 1px solid #eee;
+}

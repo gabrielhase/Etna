@@ -35,7 +35,8 @@
 
 .d3-vec { position:absolute; }
 circle {
-  fill: #993341;
+  /*fill: #993341;*/
+  fill: #ccc;
   fill-opacity: .2;
   stroke: #fff;
   stroke-width: 1.5px;
