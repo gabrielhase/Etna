@@ -1,3 +1,51 @@
+p {
+  padding: 10px 0;
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 10000;
+}
+
+/* title styles for page sections */
+.section-title {
+  margin-top: 100px;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+}
+
+.section-title.introduction {
+  background-color: #000;
+  margin-top: 0;
+}
+
+div.section-title.introduction .hero-unit {
+  background-color: #000;
+}
+.section-title.etna-map {
+  background-color: #6DCB62;
+}
+
+
+.section-title.life {
+  background-color: #FEB24C;
+}
+
+.section-title.effects {
+  background-color: #993341;
+}
+
+.section-title.tourism {
+  background-color: #387FA8;
+}
+
+.section-title h2 {
+  font-size: 3em;
+  padding: 100px 0;
+}
+
 .thumbnail {
   margin: 10px 0;
 }
