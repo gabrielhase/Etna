@@ -2,7 +2,7 @@
 this.etna = this.etna || {};
 
 this.etna.eruptionsChart = (function() {
-  var airportLocations, boundingBox, craterLocations, focusScale, height, lastExtent, margin, parseDate, width, x, xAxis, y, yAxis,
+  var addAirportShutdowns, addAshFalls, addDestroyed, addEarthquakes, addExplosions, airportLocations, boundingBox, craterLocations, focusScale, height, lastExtent, margin, parseDate, width, x, xAxis, y, yAxis,
     _this = this;
   airportLocations = {
     "catania": [15.0659, 37.4704]
@@ -57,6 +57,128 @@ this.etna.eruptionsChart = (function() {
   lastExtent = void 0;
   xAxis = d3.svg.axis().scale(x).orient("bottom");
   yAxis = d3.svg.axis().scale(y).orient('left').ticks(4);
+  addExplosions = function(craterExplosions, markerLayer) {
+    var craterName, location, tooltipText, tooltipTitle, _results;
+    _results = [];
+    for (craterName in craterExplosions) {
+      tooltipTitle = "Explosion at crater " + craterName;
+      tooltipText = craterExplosions[craterName].join(', ');
+      location = craterLocations[craterName];
+      _results.push(markerLayer.add_feature({
+        geometry: {
+          coordinates: [location.lon, location.lat]
+        },
+        properties: {
+          'marker-color': '#FEB24C',
+          'marker-size': 'small',
+          'marker-symbol': 'minefield',
+          title: "" + tooltipTitle + " in " + tooltipText
+        }
+      }));
+    }
+    return _results;
+  };
+  addAshFalls = function(ashFalls, markerLayer) {
+    var location, tooltipText, tooltipTitle, townName, _ref, _results;
+    _results = [];
+    for (townName in ashFalls) {
+      tooltipTitle = "Ash falling on " + townName;
+      tooltipText = ashFalls[townName].join(', ');
+      location = (_ref = etna.towns[townName]) != null ? _ref.location : void 0;
+      if (location) {
+        _results.push(markerLayer.add_feature({
+          geometry: {
+            coordinates: [location.lon - 0.01, location.lat - 0.01]
+          },
+          properties: {
+            'marker-color': '#777',
+            'marker-size': 'small',
+            'marker-symbol': 'star-stroked',
+            title: "" + tooltipTitle + " in " + tooltipText
+          }
+        }));
+      } else {
+        _results.push(void 0);
+      }
+    }
+    return _results;
+  };
+  addAirportShutdowns = function(airportShutdowns, markerLayer) {
+    var airportName, location, tooltipText, tooltipTitle, _results;
+    _results = [];
+    for (airportName in airportShutdowns) {
+      tooltipTitle = "Airport " + airportName + " was shut down";
+      tooltipText = airportShutdowns[airportName].join(', ');
+      location = airportLocations[airportName];
+      if (location) {
+        _results.push(markerLayer.add_feature({
+          geometry: {
+            coordinates: location
+          },
+          properties: {
+            'marker-color': '#387FA8',
+            'marker-size': 'small',
+            'marker-symbol': 'airport',
+            title: "" + tooltipTitle + " in " + tooltipText
+          }
+        }));
+      } else {
+        _results.push(void 0);
+      }
+    }
+    return _results;
+  };
+  addDestroyed = function(destroyed, markerLayer) {
+    var destroyedTown, location, tooltipText, tooltipTitle, _ref, _results;
+    _results = [];
+    for (destroyedTown in destroyed) {
+      tooltipTitle = "" + destroyedTown + " was destroyed in ";
+      tooltipText = destroyed[destroyedTown].join(', ');
+      location = (_ref = etna.towns[destroyedTown]) != null ? _ref.location : void 0;
+      if (location) {
+        _results.push(markerLayer.add_feature({
+          geometry: {
+            coordinates: [location.lon + 0.01, location.lat + 0.01]
+          },
+          properties: {
+            'marker-color': '#000',
+            'marker-size': 'small',
+            'marker-symbol': 'cross',
+            title: "" + tooltipTitle + " in " + tooltipText
+          }
+        }));
+      } else {
+        _results.push(void 0);
+      }
+    }
+    return _results;
+  };
+  addEarthquakes = function(earthquakes, markerLayer) {
+    var earthquake, location, tooltipText, tooltipTitle, _ref, _results;
+    _results = [];
+    for (earthquake in earthquakes) {
+      tooltipTitle = "An earthquake triggered by an eruption was in " + earthquake + " ";
+      tooltipText = earthquakes[earthquake].join(', ');
+      location = (_ref = etna.towns[earthquake]) != null ? _ref.location : void 0;
+      location || (location = craterLocations[earthquake]);
+      if (location) {
+        _results.push(markerLayer.add_feature({
+          geometry: {
+            coordinates: [location.lon - 0.01, location.lat + 0.01]
+          },
+          properties: {
+            'marker-color': '#5C461F',
+            'marker-size': 'small',
+            'marker-symbol': 'e',
+            title: "" + tooltipTitle + " in " + tooltipText
+          }
+        }));
+      } else {
+        _results.push(void 0);
+      }
+    }
+    return _results;
+  };
   return {
     init: function(eruptionData, map, circleLayer, markerLayer) {
       var eruption, _results;
@@ -125,7 +247,7 @@ this.etna.eruptionsChart = (function() {
       return _this.map.refresh();
     },
     eruptionsBrushEnd: function() {
-      var airport, airportName, airportShutdowns, ashFalls, crater, craterExplosions, craterName, dataFiltered, datum, destroyed, destroyedTown, earthquake, earthquakeTown, earthquakes, location, tooltipText, tooltipTitle, town, townName, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7;
+      var airport, airportShutdowns, ashFalls, crater, craterExplosions, dataFiltered, datum, destroyed, destroyedTown, earthquakeTown, earthquakes, town, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n, _ref, _ref1, _ref2, _ref3, _ref4;
       dataFiltered = _this.sanitizedData.filter(function(d, i) {
         if ((d.date >= focusScale.domain()[0]) && (d.date <= focusScale.domain()[1])) {
           return true;
@@ -176,91 +298,13 @@ this.etna.eruptionsChart = (function() {
         }
       }
       _this.markerLayer.features([]);
-      for (craterName in craterExplosions) {
-        tooltipTitle = "Explosion at crater " + craterName;
-        tooltipText = craterExplosions[craterName].join(', ');
-        location = craterLocations[craterName];
-        _this.markerLayer.add_feature({
-          geometry: {
-            coordinates: [location.lon, location.lat]
-          },
-          properties: {
-            'marker-color': '#993341',
-            'marker-symbol': 'minefield',
-            title: "" + tooltipTitle + " in " + tooltipText
-          }
-        });
-      }
-      for (townName in ashFalls) {
-        tooltipTitle = "Ash falling on " + townName;
-        tooltipText = ashFalls[townName].join(', ');
-        location = (_ref5 = etna.towns[townName]) != null ? _ref5.location : void 0;
-        if (location) {
-          _this.markerLayer.add_feature({
-            geometry: {
-              coordinates: [location.lon - 0.01, location.lat - 0.01]
-            },
-            properties: {
-              'marker-color': '#777',
-              'marker-symbol': 'star-stroked',
-              title: "" + tooltipTitle + " in " + tooltipText
-            }
-          });
-        }
-      }
-      for (airportName in airportShutdowns) {
-        tooltipTitle = "Airport " + airportName + " was shut down";
-        tooltipText = airportShutdowns[airportName].join(', ');
-        location = airportLocations[airportName];
-        if (location) {
-          _this.markerLayer.add_feature({
-            geometry: {
-              coordinates: location
-            },
-            properties: {
-              'marker-color': '#387FA8',
-              'marker-symbol': 'airport',
-              title: "" + tooltipTitle + " in " + tooltipText
-            }
-          });
-        }
-      }
-      for (destroyedTown in destroyed) {
-        tooltipTitle = "" + destroyedTown + " was destroyed in ";
-        tooltipText = destroyed[destroyedTown].join(', ');
-        location = (_ref6 = etna.towns[destroyedTown]) != null ? _ref6.location : void 0;
-        if (location) {
-          _this.markerLayer.add_feature({
-            geometry: {
-              coordinates: [location.lon + 0.01, location.lat + 0.01]
-            },
-            properties: {
-              'marker-color': '#000',
-              'marker-symbol': 'cross',
-              title: "" + tooltipTitle + " in " + tooltipText
-            }
-          });
-        }
-      }
-      for (earthquake in earthquakes) {
-        tooltipTitle = "An earthquake triggered by an eruption was in " + earthquake + " ";
-        tooltipText = earthquakes[earthquake].join(', ');
-        location = (_ref7 = etna.towns[earthquake]) != null ? _ref7.location : void 0;
-        location || (location = craterLocations[earthquake]);
-        if (location) {
-          _this.markerLayer.add_feature({
-            geometry: {
-              coordinates: [location.lon - 0.01, location.lat + 0.01]
-            },
-            properties: {
-              'marker-color': '#5C461F',
-              'marker-symbol': 'e',
-              title: "" + tooltipTitle + " in " + tooltipText
-            }
-          });
-        }
-      }
-      return $('.simplestyle-marker').parent().attr('class', 'markers');
+      addExplosions(craterExplosions, _this.markerLayer);
+      addAshFalls(ashFalls, _this.markerLayer);
+      addAirportShutdowns(airportShutdowns, _this.markerLayer);
+      addDestroyed(destroyed, _this.markerLayer);
+      addEarthquakes(earthquakes, _this.markerLayer);
+      etna.townsExplorer.addTownsToMap([focusScale.domain()[0].getFullYear(), focusScale.domain()[1].getFullYear()]);
+      return $(".simplestyle-marker").parent('div').addClass('markers');
     }
   };
 })();

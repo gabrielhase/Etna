@@ -4,34 +4,134 @@
   templates = @etna.templates
   townsData = undefined
 
+
   init: (townsDataIn, chartComponent) ->
     townsData = townsDataIn
     etna.towns = townsDataIn.towns
+    @townsLayer = etna.map.townsLayer
     @chartComponent = chartComponent
     @initEvents()
 
 
   initEvents: () ->
     @initRegionLinks()
+    @initTownsLayer()
+    @addTownsToMap([1900, 2011])
+
+
+  initTownsLayer: () ->
+    @townsLayer.factory( (f) ->
+      elem = mapbox.markers.simplestyle_factory(f)
+      $(elem).addClass("town-marker") # strangely I have to use jquery here, with mapbox API it doesn't work
+      MM.addEvent elem, 'click', (e) ->
+        etna.townsExplorer.showTown(f.properties.id)
+        etna.townsExplorer.initBackButton()
+
+      MM.addEvent elem, 'mouseover', (e) ->
+        $(elem).parent('div').css("z-index", "20")
+
+      MM.addEvent elem, 'mouseout', (e) ->
+        $(elem).parent('div').css("z-index", "10")
+
+      elem
+      # img = document.createElement('img')
+      # img.className = 'marker-image'
+      # img.setAttribute('src', 'http://www.dummyimage.com/10x10/bd00bd/fff')
+      # img
+    )
+    @interaction = mapbox.markers.interaction(@townsLayer)
+    @interaction.formatter( (feature) ->
+      populationTrend = ""
+      populationDiff = feature.properties.endPopulation - feature.properties.startPopulation
+      if populationDiff > 0
+        populationTrend = "<span class='badge badge-success'>#{populationDiff}</span>"
+      else
+        populationTrend = "<span class='badge badge-important'>#{populationDiff}</span>"
+      html = """
+      <div style="z-index: 1000">
+      <h2>#{feature.properties.town}&nbsp;<small>#{populationTrend}</small></h2>
+      <table class='table table-striped'>
+        <thead>
+          <tr>
+            <th>Value</th>
+            <th>From</th>
+            <th>To</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Year</td>
+            <td>#{feature.properties.startYear}</td>
+            <td>#{feature.properties.endYear}</td>
+          </tr>
+          <tr>
+            <td>Population</td>
+            <td>#{feature.properties.startPopulation}</td>
+            <td>#{feature.properties.endPopulation}</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      """
+    )
+
+
+  addTownsToMap: (timeWindow = []) ->
+    @townsLayer.features([]) # reset
+    # by default show the whole time window (not single yeary)
+    if timeWindow[0] == timeWindow[1]
+      timeWindow[0] = 1900
+      timeWindow[1] = 2011
+    for townName, town of etna.towns
+      location = town.location
+      markerSize = "small"
+      if town.census[timeWindow[1]] > 25000
+        markerSize = "medium"
+      if town.census[timeWindow[1]] > 100000
+        markerSize = "large"
+
+      markerColor = "#339532"
+      if town.census[timeWindow[1]] < town.census[timeWindow[0]]
+        markerColor = "#BB3E4D"
+
+
+      @townsLayer.add_feature
+        geometry:
+          coordinates: [location.lon, location.lat]
+        properties:
+          'marker-color': markerColor
+          'marker-symbol': 'town-hall'
+          'marker-size': markerSize
+          id: townName
+          town: town.name
+          startYear: timeWindow[0]
+          endYear: timeWindow[1]
+          startPopulation: town.census[timeWindow[0]]
+          endPopulation: town.census[timeWindow[1]]
+
+    # make sure z-index of markers is good
+    $(".town-marker").parent('div').addClass('town-markers')
+    $(".simplestyle-marker").parent('div').addClass('markers')
 
 
   initRegionLinks: () ->
     $(".region-link").click (event) =>
       event.preventDefault()
       $this = $(event.currentTarget)
-      @showTown($this)
+      region = $this.data("region")
+      @showTown(region)
       @initBackButton() # init the back button on a detail view
 
 
   initBackButton: () ->
     $("#back-to-towns").click (event) =>
       event.preventDefault()
+      etna.map.resetInitialState()
       $("#towns-explorer").html(templates.townsNavigation(townsData))
       @initRegionLinks() # init the region link events again
 
 
-  showTown: ($townElement) ->
-    region = $townElement.data("region")
+  showTown: (region) ->
     etna.map.showRegion(region)
     # change content of
     regionData = etna.towns[region]

@@ -22,7 +22,7 @@
     @map.ui.zoomer.add()
     @map.setZoomRange(8, 16)
     # etna always in sight
-    @map.setPanLimits([{ lat: 36.8, lon: 13.5 }, { lat: 38.5, lon: 16.5 }])
+    @map.setPanLimits([{ lat: 36.8, lon: 13.5 }, { lat: 39.5, lon: 16.5 }])
 
     # callbacks
     @map.addCallback "zoomed", (map, zoomOffset) =>
@@ -43,6 +43,11 @@
     # init map events and controls
     @initEvents()
 
+    # layer for towns
+    @townsLayer = mapbox.markers.layer()
+    @map.addLayer(@townsLayer)
+
+    # layer for volcano events
     @markerLayer = mapbox.markers.layer()
     @map.addLayer(@markerLayer)
 
@@ -83,6 +88,9 @@
       event.preventDefault()
       @resetInitialState()
 
+
+  getMap: () ->
+    @map
 
   toggleLegend: () ->
     # by default set the about content when toggling to visible

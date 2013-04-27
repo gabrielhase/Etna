@@ -2,6 +2,9 @@
 
 @etna.eruptionsChart = do ->
 
+  # ================================
+  # Private Module Properties
+  # ================================
   airportLocations = {
     "catania": [15.0659, 37.4704]
   }
@@ -47,6 +50,94 @@
   xAxis = d3.svg.axis().scale(x).orient("bottom")
   yAxis = d3.svg.axis().scale(y).orient('left').ticks(4)
 
+  # ================================
+  # Volcano Events : Marker adders
+  # ================================
+  addExplosions = (craterExplosions, markerLayer) ->
+    for craterName of craterExplosions
+      tooltipTitle = "Explosion at crater #{craterName}"
+      tooltipText = craterExplosions[craterName].join(', ')
+      location = craterLocations[craterName]
+
+      markerLayer.add_feature
+        geometry:
+          coordinates: [location.lon, location.lat]
+        properties:
+          'marker-color': '#FEB24C'
+          'marker-size': 'small'
+          'marker-symbol': 'minefield'
+          title: "#{tooltipTitle} in #{tooltipText}"
+
+
+  addAshFalls = (ashFalls, markerLayer) ->
+    for townName of ashFalls
+      tooltipTitle = "Ash falling on #{townName}"
+      tooltipText = ashFalls[townName].join(', ')
+      location = etna.towns[townName]?.location
+      # TODO: add additional locations not in the towns json
+      if location
+        markerLayer.add_feature
+          geometry:
+            coordinates: [location.lon-0.01, location.lat-0.01] # sightly offset for overlaying pins
+          properties:
+            'marker-color': '#777'
+            'marker-size': 'small'
+            'marker-symbol': 'star-stroked'
+            title: "#{tooltipTitle} in #{tooltipText}"
+
+
+  addAirportShutdowns = (airportShutdowns, markerLayer) ->
+    for airportName of airportShutdowns
+      tooltipTitle = "Airport #{airportName} was shut down"
+      tooltipText = airportShutdowns[airportName].join(', ')
+      location = airportLocations[airportName]
+      if location
+        markerLayer.add_feature
+          geometry:
+            coordinates: location
+          properties:
+            'marker-color': '#387FA8'
+            'marker-size': 'small'
+            'marker-symbol': 'airport'
+            title: "#{tooltipTitle} in #{tooltipText}"
+
+
+  addDestroyed = (destroyed, markerLayer) ->
+    for destroyedTown of destroyed
+      tooltipTitle = "#{destroyedTown} was destroyed in "
+      tooltipText = destroyed[destroyedTown].join(', ')
+      location = etna.towns[destroyedTown]?.location
+      if location
+        markerLayer.add_feature
+          geometry:
+            coordinates: [location.lon+0.01, location.lat+0.01] # slightly offset for overlaying pins
+          properties:
+            'marker-color': '#000'
+            'marker-size': 'small'
+            'marker-symbol': 'cross'
+            title: "#{tooltipTitle} in #{tooltipText}"
+
+
+  addEarthquakes = (earthquakes, markerLayer) ->
+    for earthquake of earthquakes
+      tooltipTitle = "An earthquake triggered by an eruption was in #{earthquake} "
+      tooltipText = earthquakes[earthquake].join(', ')
+      location = etna.towns[earthquake]?.location
+      location||= craterLocations[earthquake]
+      if location
+        markerLayer.add_feature
+          geometry:
+            coordinates: [location.lon-0.01, location.lat+0.01] # slightly offset for overlaying pins
+          properties:
+            'marker-color': '#5C461F'
+            'marker-size': 'small'
+            'marker-symbol': 'e'
+            title: "#{tooltipTitle} in #{tooltipText}"
+
+
+  # ================================
+  # Module Singleton
+  # ================================
   # init the non-changing data for this singleton
   init: (eruptionData, map, circleLayer, markerLayer) =>
     @map = map
@@ -138,12 +229,10 @@
     dataFiltered = @sanitizedData.filter( (d, i) ->
       true if (d.date >= focusScale.domain()[0]) && (d.date <= focusScale.domain()[1])
     )
-    # veis = []
-    # for datum in dataFiltered
-    #   veis.push(datum.vei)
     @circleLayer.data(boundingBox, dataFiltered);
     @circleLayer.draw();
     @map.refresh();
+
 
   eruptionsBrushEnd: () =>
     dataFiltered = @sanitizedData.filter( (d, i) ->
@@ -175,76 +264,17 @@
           earthquakes[earthquakeTown] ||= []
           earthquakes[earthquakeTown].push(datum.date.getFullYear())
 
-    @markerLayer.features([])
-    for craterName of craterExplosions
-      tooltipTitle = "Explosion at crater #{craterName}"
-      tooltipText = craterExplosions[craterName].join(', ')
-      location = craterLocations[craterName]
+    @markerLayer.features([]) # reset
+    addExplosions(craterExplosions, @markerLayer)
+    addAshFalls(ashFalls, @markerLayer)
+    addAirportShutdowns(airportShutdowns, @markerLayer)
+    addDestroyed(destroyed, @markerLayer)
+    addEarthquakes(earthquakes, @markerLayer)
 
-      @markerLayer.add_feature
-        geometry:
-          coordinates: [location.lon, location.lat]
-        properties:
-          'marker-color': '#993341'
-          'marker-symbol': 'minefield'
-          title: "#{tooltipTitle} in #{tooltipText}"
-
-    for townName of ashFalls
-      tooltipTitle = "Ash falling on #{townName}"
-      tooltipText = ashFalls[townName].join(', ')
-      location = etna.towns[townName]?.location
-      # TODO: add additional locations
-      if location
-        @markerLayer.add_feature
-          geometry:
-            coordinates: [location.lon-0.01, location.lat-0.01] # sightly offset for overlaying pins
-          properties:
-            'marker-color': '#777'
-            'marker-symbol': 'star-stroked'
-            title: "#{tooltipTitle} in #{tooltipText}"
-
-    for airportName of airportShutdowns
-      tooltipTitle = "Airport #{airportName} was shut down"
-      tooltipText = airportShutdowns[airportName].join(', ')
-      location = airportLocations[airportName]
-      if location
-        @markerLayer.add_feature
-          geometry:
-            coordinates: location
-          properties:
-            'marker-color': '#387FA8'
-            'marker-symbol': 'airport'
-            title: "#{tooltipTitle} in #{tooltipText}"
-
-    for destroyedTown of destroyed
-      tooltipTitle = "#{destroyedTown} was destroyed in "
-      tooltipText = destroyed[destroyedTown].join(', ')
-      location = etna.towns[destroyedTown]?.location
-      if location
-        @markerLayer.add_feature
-          geometry:
-            coordinates: [location.lon+0.01, location.lat+0.01] # slightly offset for overlaying pins
-          properties:
-            'marker-color': '#000'
-            'marker-symbol': 'cross'
-            title: "#{tooltipTitle} in #{tooltipText}"
-
-    for earthquake of earthquakes
-      tooltipTitle = "An earthquake triggered by an eruption was in #{earthquake} "
-      tooltipText = earthquakes[earthquake].join(', ')
-      location = etna.towns[earthquake]?.location
-      location||= craterLocations[earthquake]
-      if location
-        @markerLayer.add_feature
-          geometry:
-            coordinates: [location.lon-0.01, location.lat+0.01] # slightly offset for overlaying pins
-          properties:
-            'marker-color': '#5C461F'
-            'marker-symbol': 'e'
-            title: "#{tooltipTitle} in #{tooltipText}"
-
-
-
+    #draw towns
+    etna.townsExplorer.addTownsToMap([focusScale.domain()[0].getFullYear(),
+      focusScale.domain()[1].getFullYear()])
 
     # make sure z-index of markers is good
-    $('.simplestyle-marker').parent().attr('class', 'markers')
+    #$(".simplestyle-marker:not('.town-marker')").parent('div').addClass('markers')
+    $(".simplestyle-marker").parent('div').addClass('markers')

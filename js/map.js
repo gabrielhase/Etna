@@ -22,7 +22,7 @@ this.etna.map = (function() {
           lat: 36.8,
           lon: 13.5
         }, {
-          lat: 38.5,
+          lat: 39.5,
           lon: 16.5
         }
       ]);
@@ -42,6 +42,8 @@ this.etna.map = (function() {
       }, 10);
       this.teaserHtml = $("#map-legend").html();
       this.initEvents();
+      this.townsLayer = mapbox.markers.layer();
+      this.map.addLayer(this.townsLayer);
       this.markerLayer = mapbox.markers.layer();
       this.map.addLayer(this.markerLayer);
       this.initD3Layer();
@@ -74,6 +76,9 @@ this.etna.map = (function() {
         event.preventDefault();
         return _this.resetInitialState();
       });
+    },
+    getMap: function() {
+      return this.map;
     },
     toggleLegend: function() {
       if (!$("#map-legend").is(":visible")) {

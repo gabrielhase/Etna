@@ -24,9 +24,10 @@
     <script src="js/towns.js"></script>
     <script src="js/vega-line-chart.js"></script>
 
+<!--
     <script src="js-sebastian/tweets.js"></script>
     <script src="js-sebastian/sentiment.js"></script>
-
+-->
   </head>
 
   <body class="container">
@@ -200,9 +201,11 @@
                 <hr style="margin: 0">
                 <small>Legend</small>
 
-
                 <ul class="legend">
-                  <li><img src="img/plume_icon.png" width="15" height="15" /> <span>Visible Area</span></li>
+                  <li><img src="img/town_growing_icon.png" width="15" height="15" /> <span>Growing Town</span></li>
+                  <li><img src="img/town_shrinking_icon.png" width="15" height="15" /> <span>Shrinking Town</span></li>
+
+                  <li style="margin-top: 5px"><img src="img/plume_icon.png" width="15" height="15" /> <span>VEI</span></li>
                   <li><img src="img/explosion_icon.png" width="15" height="15" /> <span>Explosion</span></li>
                   <li><img src="img/ash_icon.png" width="15" height="15" /> <span>Ashfall</span></li>
                   <li><img src="img/airport_icon.png" width="15" height="15" /> <span>Airport Shutdown</span></li>
@@ -266,7 +269,7 @@
           });
         });
         // init the sentiment chart
-        etna.sentimentChart.init();
+        //etna.sentimentChart.init();
       });
     </script>
   </body>
