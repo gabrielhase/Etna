@@ -104,10 +104,16 @@
       .attr("stroke", "red")
       .attr("stroke-width", 10)
       .attr("fill", "red")
-      .selectAll('title')
-        .text((d, i) ->
-          "lavaflow in #{d.date.getFullYear()}"
-        )
+      .attr("data-toggle", "tooltip")
+      .attr("title", (d, i) ->
+        "lavaflow in #{d.date.getFullYear()}"
+      )
+      .attr("class", "lava-flow")
+
+      # .selectAll('title')
+      #   .text((d, i) ->
+      #     "lavaflow in #{d.date.getFullYear()}"
+      #  )
 
 
   data: (boundingBox, flows) ->
@@ -115,7 +121,7 @@
     lava = mapDrawGroup.selectAll('path')
       .data(flows)
     lava.exit().remove().remove()
-    lava.enter().append('path').append('title')
+    lava.enter().append('path') #.append('title')
 
 
   # sets the visible map extension

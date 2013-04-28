@@ -49,3 +49,9 @@ circle {
 .lava-vec path {
   opacity: 0.2;
 }
+
+/* re-style bootstrap tooltips to be white */
+.tooltip .tooltip-inner {
+  background-color: #fff;
+  color: #000;
+}

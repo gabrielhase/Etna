@@ -271,7 +271,11 @@ this.etna.eruptionsChart = (function() {
       _this.circleLayer.draw();
       _this.lavaLayer.data(boundingBox, lavaFiltered);
       _this.lavaLayer.draw();
-      return _this.map.refresh();
+      _this.map.refresh();
+      return $(".lava-flow").tooltip({
+        'container': 'body',
+        'placement': 'top'
+      });
     },
     eruptionsBrushEnd: function() {
       var airport, airportShutdowns, ashFalls, crater, craterExplosions, dataFiltered, datum, destroyed, destroyedTown, earthquakeTown, earthquakes, town, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n, _ref, _ref1, _ref2, _ref3, _ref4;

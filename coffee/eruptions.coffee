@@ -249,6 +249,10 @@
     @lavaLayer.data(boundingBox, lavaFiltered)
     @lavaLayer.draw()
     @map.refresh();
+    # activate tooltips on the body! (wouldn't work inside svg)
+    $(".lava-flow").tooltip
+      'container': 'body'
+      'placement': 'top'
 
 
   eruptionsBrushEnd: () =>

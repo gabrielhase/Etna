@@ -84,16 +84,16 @@ this.etna.lavaLayer = function(map, mapDrawSvg, mapDrawGroup) {
           default:
             return "M 0 0 L 0 0";
         }
-      }).attr("stroke", "red").attr("stroke-width", 10).attr("fill", "red").selectAll('title').text(function(d, i) {
+      }).attr("stroke", "red").attr("stroke-width", 10).attr("fill", "red").attr("data-toggle", "tooltip").attr("title", function(d, i) {
         return "lavaflow in " + (d.date.getFullYear());
-      });
+      }).attr("class", "lava-flow");
     },
     data: function(boundingBox, flows) {
       var bounds, lava;
       bounds = d3.geo.bounds(boundingBox);
       lava = mapDrawGroup.selectAll('path').data(flows);
       lava.exit().remove().remove();
-      return lava.enter().append('path').append('title');
+      return lava.enter().append('path');
     },
     extent: function() {
       return new MM.Extent(new MM.Location(bounds[0][1], bounds[0][0]), new MM.Location(bounds[1][1], bounds[1][0]));
