@@ -4,7 +4,7 @@
     "craters": [],
     "sideeffects": [],
     "airportShutdown": ["catania"],
-    "lavaflows": [],
+    "lavaflows": {},
     "ash": [],
     "destroyed": []
   },
@@ -12,7 +12,7 @@
     "vei": 2,
     "craters": ["SouthEast", "Bocca Nuova", "NorthEast"],
     "sideeffects": [],
-    "lavaflows": [],
+    "lavaflows": {},
     "ash": [],
     "destroyed": []
   },
@@ -21,9 +21,9 @@
     "craters": ["Voragine"],
     "sideeffects": ["earthquakes"],
     "earthquake": ["Voragine"],
-    "lavaflows": [
-      { "?": 6.5 }
-    ],
+    "lavaflows": {
+      "?": 6.5
+    },
     "ash": [],
     "destroyed": []
   },
@@ -32,10 +32,10 @@
     "craters": ["SouthEast"],
     "sideeffects": ["airportShutdown"],
     "airportShutdown": ["catania"],
-    "lavaflows": [
-      { "Valle del Bove": 4.5 },
-      { "Valle del Bove": 6.2 }
-    ],
+    "lavaflows": {
+      "Valle del Bove": 4.5,
+      "Valle del Bove": 6.2
+    },
     "ash": ["EastFlank, NorthFlank"],
     "destroyed": []
   },
@@ -44,7 +44,7 @@
     "craters": ["SouthEast"],
     "sideeffects": [],
     "airportShutdown": ["catania"],
-    "lavaflows": [],
+    "lavaflows": {},
     "ash": [],
     "destroyed": []
   },
@@ -52,9 +52,9 @@
     "vei": 1,
     "craters": ["SouthEast"],
     "sideeffects": [],
-    "lavaflows": [
-      { "Valle del Bove": 3 }
-    ],
+    "lavaflows": {
+      "Valle del Bove": 3
+    },
     "ash": [],
     "destroyed": []
   },
@@ -62,7 +62,7 @@
     "vei": 1,
     "craters": ["SouthEast"],
     "sideeffects": [],
-    "lavaflows": [],
+    "lavaflows": {},
     "ash": [],
     "destroyed": []
   },
@@ -70,7 +70,7 @@
     "vei": 1,
     "craters": ["SouthEast"],
     "sideeffects": [],
-    "lavaflows": [],
+    "lavaflows": {},
     "ash": [],
     "destroyed": []
   },
@@ -80,7 +80,7 @@
     "sideeffects": ["deformation", "touristStationDestroyed"],
     "airportShutdown": ["catania"],
     "earthquake": ["zafferana"],
-    "lavaflows": [],
+    "lavaflows": {},
     "ash": ["catania", "belpasso"],
     "destroyed": []
   },
@@ -88,9 +88,9 @@
     "vei": 1,
     "craters": ["Voragine"],
     "sideeffects": [],
-    "lavaflows": [
-      { "south": 0.5 }
-    ],
+    "lavaflows": {
+      "South": 0.5
+    },
     "ash": ["giarre"],
     "destroyed": []
   },
@@ -98,7 +98,7 @@
     "vei": 1,
     "craters": ["Voragine"],
     "sideeffects": [],
-    "lavaflows": [],
+    "lavaflows": {},
     "ash": ["catania", "siracusa", "zafferana"],
     "destroyed": []
   },
@@ -107,7 +107,7 @@
     "craters": ["NorthEast"],
     "sideeffects": ["airportShutdown"],
     "airportShutdown": ["catania"],
-    "lavaflows": [],
+    "lavaflows": {},
     "ash": ["giarre"],
     "destroyed": []
   },
@@ -116,9 +116,9 @@
     "craters": ["SouthEast"],
     "sideeffects": ["airportShutdown"],
     "airportShutdown": ["catania"],
-    "lavaflows": [
-      { "SSouthEast": "upToZafferana"}
-    ],
+    "lavaflows": {
+      "SSouthEast": "upToZafferana"
+    },
     "ash": [],
     "destroyed": []
   },
@@ -126,7 +126,7 @@
     "vei": 2,
     "craters": ["SouthEast"],
     "sideeffects": [],
-    "lavaflows": [],
+    "lavaflows": {},
     "ash": [],
     "destroyed": []
   },
@@ -134,7 +134,7 @@
     "vei": 1,
     "craters": ["SouthEast"],
     "sideeffects": [],
-    "lavaflows": [],
+    "lavaflows": {},
     "ash": ["NorthWestFlank", "Barcellona Pozzo di Grotto"],
     "destroyed": []
   },
@@ -143,9 +143,9 @@
     "craters": ["NorthEast"],
     "sideeffects": ["airportShutdown"],
     "airportShutdown": ["catania"],
-    "lavaflows": [
-      { "SouthEast": 1.5 }
-    ],
+    "lavaflows": {
+      "SouthEast": 1.5
+    },
     "ash": ["SouthEastFlank", "siracusa"],
     "destroyed": []
   },
@@ -153,9 +153,9 @@
     "vei": 1,
     "craters": ["Bocca Nuova"],
     "sideeffects": [],
-    "lavaflows": [
-      { "South": 6.5 }
-    ],
+    "lavaflows": {
+      "South": 6.5
+    },
     "ash": [],
     "destroyed": []
   },
@@ -163,9 +163,9 @@
     "vei": 2,
     "craters": ["NorthEast"],
     "sideeffects": [],
-    "lavaflows": [
-      { "North": 6 }
-    ],
+    "lavaflows": {
+      "North": 6
+    },
     "ash": [],
     "destroyed": []
   },
@@ -174,7 +174,7 @@
     "craters": ["SouthEast"],
     "sideeffects": ["airportShutdown"],
     "airportShutdown": ["catania"],
-    "lavaflows": [],
+    "lavaflows": {},
     "ash": ["catania", "siracusa"],
     "destroyed": []
   },
@@ -182,7 +182,7 @@
     "vei": 2,
     "craters": [],
     "sideeffects": [],
-    "lavaflows": [],
+    "lavaflows": {},
     "ash": [],
     "destroyed": []
   },
@@ -190,7 +190,7 @@
     "vei": 1,
     "craters": ["Voragine"],
     "sideeffects": [],
-    "lavaflows": [],
+    "lavaflows": {},
     "ash": ["taormina", "messina"],
     "destroyed": []
   },
@@ -198,7 +198,7 @@
     "vei": 2,
     "craters": [],
     "sideeffects": [],
-    "lavaflows": [],
+    "lavaflows": {},
     "ash": [],
     "destroyed": []
   },
@@ -206,7 +206,7 @@
     "vei": 3,
     "craters": ["NorthEast"],
     "sideeffects": [],
-    "lavaflows": [],
+    "lavaflows": {},
     "ash": ["EastFlank", "giarre"],
     "destroyed": []
   },
@@ -214,7 +214,7 @@
     "vei": 2,
     "craters": ["NorthEast"],
     "sideeffects": [],
-    "lavaflows": [],
+    "lavaflows": {},
     "ash": ["EastFlank", "messina"],
     "destroyed": []
   },
@@ -222,9 +222,9 @@
     "vei": 1,
     "craters": ["NorthEast"],
     "sideeffects": [],
-    "lavaflows": [
-      { "East": "up to mascali" }
-    ],
+    "lavaflows": {
+      "East": 17
+    },
     "ash": ["EastFlank", "messina"],
     "destroyed": ["mascali"]
   },
@@ -232,9 +232,9 @@
     "vei": 1,
     "craters": ["Voragine", "SouthEast", "Bocca Nuova", "NorthEast"],
     "sideeffects": [],
-    "lavaflows": [
-      { "South": "up to belpasso" }
-    ],
+    "lavaflows": {
+      "South": 15.6
+    },
     "ash": [],
     "destroyed": ["cavaliere"]
   },
@@ -243,7 +243,7 @@
     "craters": ["SouthEast"],
     "sideeffects": ["earthquakes"],
     "earthquake": ["messina"],
-    "lavaflows": [],
+    "lavaflows": {},
     "ash": [],
     "destroyed": ["messina"]
   }

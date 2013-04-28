@@ -65,7 +65,8 @@
       .attr('class', 'd3-vec')
     mapDrawSvg = mapDrawDiv.append('svg')
     mapDrawGroup = mapDrawSvg.append('g')
-    @circleLayer = etna.d3layer(@map, mapDrawSvg, mapDrawGroup)
+    lavaDrawGroup = mapDrawSvg.append('g')
+    @circleLayer = etna.d3layer(@map, mapDrawSvg, mapDrawGroup, lavaDrawGroup)
     @circleLayer.parent = mapDrawDiv.node()
     @map.addLayer(@circleLayer)
 

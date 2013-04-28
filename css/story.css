@@ -19,11 +19,27 @@ p {
 .section-title.introduction {
   background-color: #000;
   margin-top: 0;
+  background-color: #000;
+  background-image: url('../img/lava.jpg');
+  height: 550px;
+  background-repeat: no-repeat;
+  background-position: left;
 }
 
-div.section-title.introduction .hero-unit {
-  background-color: #000;
+div.section-title.introduction .intro-title {
+  position: absolute;
+  top: 250px;
+  right: 150px;
 }
+
+div.section-title.introduction .intro-title h1 {
+  font-size: 3em;
+}
+
+div.section-title.introduction .intro-title p {
+  font-size: 1.5em;
+}
+
 .section-title.etna-map {
   background-color: #6DCB62;
 }
@@ -39,6 +55,10 @@ div.section-title.introduction .hero-unit {
 
 .section-title.tourism {
   background-color: #387FA8;
+}
+
+.section-title.cs171 {
+  background-color: #000;
 }
 
 .section-title h2 {

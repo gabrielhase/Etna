@@ -51,11 +51,12 @@ this.etna.map = (function() {
       return etna.eruptionsChart.drawBarchart(etna.eruptions);
     },
     initD3Layer: function() {
-      var mapDrawDiv, mapDrawGroup, mapDrawSvg;
+      var lavaDrawGroup, mapDrawDiv, mapDrawGroup, mapDrawSvg;
       mapDrawDiv = d3.select(document.body).append('div').attr('class', 'd3-vec');
       mapDrawSvg = mapDrawDiv.append('svg');
       mapDrawGroup = mapDrawSvg.append('g');
-      this.circleLayer = etna.d3layer(this.map, mapDrawSvg, mapDrawGroup);
+      lavaDrawGroup = mapDrawSvg.append('g');
+      this.circleLayer = etna.d3layer(this.map, mapDrawSvg, mapDrawGroup, lavaDrawGroup);
       this.circleLayer.parent = mapDrawDiv.node();
       return this.map.addLayer(this.circleLayer);
     },

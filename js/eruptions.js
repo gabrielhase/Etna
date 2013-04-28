@@ -201,7 +201,8 @@ this.etna.eruptionsChart = (function() {
           'ash': eruptionData[eruption].ash,
           'airportShutdown': eruptionData[eruption].airportShutdown,
           'destroyed': eruptionData[eruption].destroyed,
-          'earthquake': eruptionData[eruption].earthquake
+          'earthquake': eruptionData[eruption].earthquake,
+          'lavaflows': eruptionData[eruption].lavaflows
         }));
       }
       return _results;

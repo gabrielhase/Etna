@@ -158,6 +158,7 @@
         'airportShutdown': eruptionData[eruption].airportShutdown
         'destroyed': eruptionData[eruption].destroyed
         'earthquake': eruptionData[eruption].earthquake
+        'lavaflows': eruptionData[eruption].lavaflows
 
 
   drawBarchart: (eruptionData) =>

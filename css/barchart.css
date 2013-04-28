@@ -54,3 +54,7 @@ circle {
   stroke: #fff;
   stroke-width: 1.5px;
 }
+
+path {
+  opacity: 0.2;
+}
