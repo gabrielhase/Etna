@@ -3,21 +3,11 @@
   z-index: 100;
 }
 
-/* make sure markers layer is always on top for tooltips */
-
-/*
-div.markers div.marker-tooltip {
-  z-index: 1000 !important;
-}
-  This doesn't help since the z-index of the parent element overrules
-  => the parents z-index is set by mapbox so I changed the mapbox API code
-*/
-/*
-.markers {
-  z-index: 99 !important;
-}
-*/
 .d3-vec {
+  z-index: 1;
+}
+
+.lava-vec {
   z-index: 1;
 }
 
@@ -50,11 +40,12 @@ div.markers div.marker-tooltip {
 circle {
   /*fill: #993341;*/
   fill: #ccc;
-  fill-opacity: .2;
+  fill-opacity: .1;
   stroke: #fff;
   stroke-width: 1.5px;
 }
 
-path {
+.lava-vec { position: absolute; }
+.lava-vec path {
   opacity: 0.2;
 }

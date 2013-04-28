@@ -78,7 +78,7 @@
       if location
         markerLayer.add_feature
           geometry:
-            coordinates: [location.lon-0.01, location.lat-0.01] # sightly offset for overlaying pins
+            coordinates: [location.lon-0.005, location.lat-0.005] # sightly offset for overlaying pins
           properties:
             'marker-color': '#777'
             'marker-size': 'small'
@@ -110,7 +110,7 @@
       if location
         markerLayer.add_feature
           geometry:
-            coordinates: [location.lon+0.01, location.lat+0.01] # slightly offset for overlaying pins
+            coordinates: [location.lon+0.005, location.lat+0.005] # slightly offset for overlaying pins
           properties:
             'marker-color': '#000'
             'marker-size': 'small'
@@ -127,7 +127,7 @@
       if location
         markerLayer.add_feature
           geometry:
-            coordinates: [location.lon-0.01, location.lat+0.01] # slightly offset for overlaying pins
+            coordinates: [location.lon-0.005, location.lat+0.005] # slightly offset for overlaying pins
           properties:
             'marker-color': '#5C461F'
             'marker-size': 'small'
@@ -139,9 +139,10 @@
   # Module Singleton
   # ================================
   # init the non-changing data for this singleton
-  init: (eruptionData, map, circleLayer, markerLayer) =>
+  init: (eruptionData, map, circleLayer, markerLayer, lavaLayer) =>
     @map = map
     @circleLayer = circleLayer
+    @lavaLayer = lavaLayer
     @markerLayer = markerLayer
     @markerLayer.factory((f) ->
       elem = mapbox.markers.simplestyle_factory(f)
@@ -149,6 +150,7 @@
     )
     @interaction = mapbox.markers.interaction(@markerLayer)
     @sanitizedData = []
+    @lavaFlows = []
     for eruption of eruptionData
       @sanitizedData.push
         'date': parseDate(eruption)
@@ -159,6 +161,15 @@
         'destroyed': eruptionData[eruption].destroyed
         'earthquake': eruptionData[eruption].earthquake
         'lavaflows': eruptionData[eruption].lavaflows
+
+      for lavaStream in eruptionData[eruption].lavaflows
+        @lavaFlows.push
+          'direction': lavaStream.flow.direction
+          'length': lavaStream.flow.length
+          'crater': lavaStream.crater
+          'date': parseDate(eruption)
+          'reachedHere': 1
+          'yearsReached': [parseDate(eruption).getFullYear()]
 
 
   drawBarchart: (eruptionData) =>
@@ -230,8 +241,13 @@
     dataFiltered = @sanitizedData.filter( (d, i) ->
       true if (d.date >= focusScale.domain()[0]) && (d.date <= focusScale.domain()[1])
     )
-    @circleLayer.data(boundingBox, dataFiltered);
+    lavaFiltered = @lavaFlows.filter( (d, i) ->
+      true if (d.date >= focusScale.domain()[0]) && (d.date <= focusScale.domain()[1])
+    )
+    @circleLayer.data(boundingBox, dataFiltered)
     @circleLayer.draw();
+    @lavaLayer.data(boundingBox, lavaFiltered)
+    @lavaLayer.draw()
     @map.refresh();
 
 
@@ -277,5 +293,4 @@
       focusScale.domain()[1].getFullYear()])
 
     # make sure z-index of markers is good
-    #$(".simplestyle-marker:not('.town-marker')").parent('div').addClass('markers')
     $(".simplestyle-marker").parent('div').addClass('markers')

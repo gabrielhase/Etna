@@ -47,16 +47,25 @@ this.etna.map = (function() {
       this.markerLayer = mapbox.markers.layer();
       this.map.addLayer(this.markerLayer);
       this.initD3Layer();
-      etna.eruptionsChart.init(etna.eruptions, this.map, this.circleLayer, this.markerLayer);
+      this.initLavaLayer();
+      etna.eruptionsChart.init(etna.eruptions, this.map, this.circleLayer, this.markerLayer, this.lavaLayer);
       return etna.eruptionsChart.drawBarchart(etna.eruptions);
     },
+    initLavaLayer: function() {
+      var lavaDrawDiv, lavaDrawGroup, lavaDrawSvg;
+      lavaDrawDiv = d3.select(document.body).append('div').attr('class', 'lava-vec');
+      lavaDrawSvg = lavaDrawDiv.append('svg');
+      lavaDrawGroup = lavaDrawSvg.append('g');
+      this.lavaLayer = etna.lavaLayer(this.map, lavaDrawSvg, lavaDrawGroup);
+      this.lavaLayer.parent = lavaDrawDiv.node();
+      return this.map.addLayer(this.lavaLayer);
+    },
     initD3Layer: function() {
-      var lavaDrawGroup, mapDrawDiv, mapDrawGroup, mapDrawSvg;
+      var mapDrawDiv, mapDrawGroup, mapDrawSvg;
       mapDrawDiv = d3.select(document.body).append('div').attr('class', 'd3-vec');
       mapDrawSvg = mapDrawDiv.append('svg');
       mapDrawGroup = mapDrawSvg.append('g');
-      lavaDrawGroup = mapDrawSvg.append('g');
-      this.circleLayer = etna.d3layer(this.map, mapDrawSvg, mapDrawGroup, lavaDrawGroup);
+      this.circleLayer = etna.d3layer(this.map, mapDrawSvg, mapDrawGroup);
       this.circleLayer.parent = mapDrawDiv.node();
       return this.map.addLayer(this.circleLayer);
     },

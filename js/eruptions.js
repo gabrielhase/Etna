@@ -88,7 +88,7 @@ this.etna.eruptionsChart = (function() {
       if (location) {
         _results.push(markerLayer.add_feature({
           geometry: {
-            coordinates: [location.lon - 0.01, location.lat - 0.01]
+            coordinates: [location.lon - 0.005, location.lat - 0.005]
           },
           properties: {
             'marker-color': '#777',
@@ -138,7 +138,7 @@ this.etna.eruptionsChart = (function() {
       if (location) {
         _results.push(markerLayer.add_feature({
           geometry: {
-            coordinates: [location.lon + 0.01, location.lat + 0.01]
+            coordinates: [location.lon + 0.005, location.lat + 0.005]
           },
           properties: {
             'marker-color': '#000',
@@ -164,7 +164,7 @@ this.etna.eruptionsChart = (function() {
       if (location) {
         _results.push(markerLayer.add_feature({
           geometry: {
-            coordinates: [location.lon - 0.01, location.lat + 0.01]
+            coordinates: [location.lon - 0.005, location.lat + 0.005]
           },
           properties: {
             'marker-color': '#5C461F',
@@ -180,10 +180,11 @@ this.etna.eruptionsChart = (function() {
     return _results;
   };
   return {
-    init: function(eruptionData, map, circleLayer, markerLayer) {
-      var eruption, _results;
+    init: function(eruptionData, map, circleLayer, markerLayer, lavaLayer) {
+      var eruption, lavaStream, _results;
       _this.map = map;
       _this.circleLayer = circleLayer;
+      _this.lavaLayer = lavaLayer;
       _this.markerLayer = markerLayer;
       _this.markerLayer.factory(function(f) {
         var elem;
@@ -192,9 +193,10 @@ this.etna.eruptionsChart = (function() {
       });
       _this.interaction = mapbox.markers.interaction(_this.markerLayer);
       _this.sanitizedData = [];
+      _this.lavaFlows = [];
       _results = [];
       for (eruption in eruptionData) {
-        _results.push(_this.sanitizedData.push({
+        _this.sanitizedData.push({
           'date': parseDate(eruption),
           'vei': +eruptionData[eruption].vei,
           'craters': eruptionData[eruption].craters,
@@ -203,7 +205,24 @@ this.etna.eruptionsChart = (function() {
           'destroyed': eruptionData[eruption].destroyed,
           'earthquake': eruptionData[eruption].earthquake,
           'lavaflows': eruptionData[eruption].lavaflows
-        }));
+        });
+        _results.push((function() {
+          var _i, _len, _ref, _results1;
+          _ref = eruptionData[eruption].lavaflows;
+          _results1 = [];
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            lavaStream = _ref[_i];
+            _results1.push(this.lavaFlows.push({
+              'direction': lavaStream.flow.direction,
+              'length': lavaStream.flow.length,
+              'crater': lavaStream.crater,
+              'date': parseDate(eruption),
+              'reachedHere': 1,
+              'yearsReached': [parseDate(eruption).getFullYear()]
+            }));
+          }
+          return _results1;
+        }).call(_this));
       }
       return _results;
     },
@@ -235,7 +254,7 @@ this.etna.eruptionsChart = (function() {
       }
     },
     eruptionsBrush: function() {
-      var dataFiltered;
+      var dataFiltered, lavaFiltered;
       lastExtent = _this.brush.extent();
       focusScale.domain(_this.brush.extent());
       dataFiltered = _this.sanitizedData.filter(function(d, i) {
@@ -243,8 +262,15 @@ this.etna.eruptionsChart = (function() {
           return true;
         }
       });
+      lavaFiltered = _this.lavaFlows.filter(function(d, i) {
+        if ((d.date >= focusScale.domain()[0]) && (d.date <= focusScale.domain()[1])) {
+          return true;
+        }
+      });
       _this.circleLayer.data(boundingBox, dataFiltered);
       _this.circleLayer.draw();
+      _this.lavaLayer.data(boundingBox, lavaFiltered);
+      _this.lavaLayer.draw();
       return _this.map.refresh();
     },
     eruptionsBrushEnd: function() {

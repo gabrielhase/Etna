@@ -54,9 +54,23 @@
     # init the layer on which the eruption circles will be drawn
     @initD3Layer()
 
+    # init the layer on which the lava flows will be drawn
+    @initLavaLayer()
+
     # init and draw the barchart
-    etna.eruptionsChart.init(etna.eruptions, @map, @circleLayer, @markerLayer)
+    etna.eruptionsChart.init(etna.eruptions, @map, @circleLayer, @markerLayer, @lavaLayer)
     etna.eruptionsChart.drawBarchart(etna.eruptions)
+
+
+  initLavaLayer: () ->
+    lavaDrawDiv = d3.select(document.body)
+      .append('div')
+      .attr('class', 'lava-vec')
+    lavaDrawSvg = lavaDrawDiv.append('svg')
+    lavaDrawGroup = lavaDrawSvg.append('g')
+    @lavaLayer = etna.lavaLayer(@map, lavaDrawSvg, lavaDrawGroup)
+    @lavaLayer.parent = lavaDrawDiv.node()
+    @map.addLayer(@lavaLayer)
 
 
   initD3Layer: () ->
@@ -65,14 +79,12 @@
       .attr('class', 'd3-vec')
     mapDrawSvg = mapDrawDiv.append('svg')
     mapDrawGroup = mapDrawSvg.append('g')
-    lavaDrawGroup = mapDrawSvg.append('g')
-    @circleLayer = etna.d3layer(@map, mapDrawSvg, mapDrawGroup, lavaDrawGroup)
+    @circleLayer = etna.d3layer(@map, mapDrawSvg, mapDrawGroup)
     @circleLayer.parent = mapDrawDiv.node()
     @map.addLayer(@circleLayer)
 
 
   initEvents: () ->
-
     # hide legend and tooltips if users clicks somewhere on the map
     $("#map").click (event) =>
       @hideLegend()
