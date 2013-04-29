@@ -46,6 +46,21 @@ All modules are namespaced under the name etna in order to only have one injecti
 
 The folder js-sebastian contains the code for the twitter visualization. Tweets.js contains all tweets and sentiment.js the code for the visualization.
 
+**Citation**
+
+The code makes use of several external libraries. The libraries are all placed in the folder "js/vendor". They are:
+  - Twitter Bootstrap by M. Otto and J. Thornton
+    - CSS Framework (bootstrap.css in css folder)
+    - Tooltip (bootstrap-tooltip.js)
+    - Scrollspy (scrollspy.js)
+  - d3 by Bostock et al.
+  - vega by J. Heer
+  - jquery by J. Resig
+  - mapbox by mapbox Inc.
+  - underscore by DocumentCloud
+
+The file vega-line-chart.js started out with the example of a line chart from J. Heer on the Vega Editor page (http://trifacta.github.io/vega/editor/), but was changed thereafter by me. The code in d3layer.js, eruptions.js, lavaLayer.js, map.js, templates.js, and towns.js is developed by me (with the occasional turning to stackoverflow to fix upcoming problems).
+
 **Deployment**
 
 Deployment of the app works over heroku and a local git repository. To host the page on heroku I implemented a little node.js server that does nothing else than just serve static files. The setup for the heroku drone is in Procfile.

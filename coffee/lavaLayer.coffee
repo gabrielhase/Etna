@@ -68,6 +68,7 @@
         #   East, West: PI / 2
         #     -> steered over horiz direction
 
+        # NOTE: this does not include all directions, just the ones that are actually in the data
         switch d.direction
           when "South"
             getPath(d.length, craterLocation, craterLocationMapped, 0, 1, -1)
