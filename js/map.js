@@ -82,9 +82,24 @@ this.etna.map = (function() {
         event.preventDefault();
         return _this.toggleLegend();
       });
-      return $(".home-link").click(function(event) {
+      $(".home-link").click(function(event) {
         event.preventDefault();
         return _this.resetInitialState();
+      });
+      return $("#map-regions").delegate(".toggle-legend", "click", function(event) {
+        var $elem;
+        event.preventDefault();
+        if ($(".legend").is(':visible')) {
+          $elem = $(event.currentTarget);
+          $(".legend").hide();
+          $elem.children("i").removeClass("icon-minus-sign");
+          return $elem.children("i").addClass("icon-plus-sign");
+        } else {
+          $elem = $(event.currentTarget);
+          $(".legend").show();
+          $elem.children("i").removeClass("icon-plus-sign");
+          return $elem.children("i").addClass("icon-minus-sign");
+        }
       });
     },
     getMap: function() {

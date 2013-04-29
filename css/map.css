@@ -59,6 +59,15 @@ body {
   font-size: 0.8em;
 }
 
+#map-regions a.toggle-legend {
+  display: inline;
+}
+
+#map-regions a.toggle-legend:hover {
+  background: #fff;
+  color: #000;
+}
+
 #map-regions a:hover {
   background: #012E18;
   color: #fff;

@@ -1,3 +1,9 @@
+**Project**
+
+This data story was developed as final project for the course CS171 at Harvard.
+
+All code is Open-Source an available on: https://github.com/gabrielhase/Etna
+
 **Structure**
 
 The relevant code for the grading are in the folders:
@@ -8,6 +14,7 @@ The relevant code for the grading are in the folders:
   - img
   - etna-screencast.m4v
   - index.html
+  - scrapers
 
 These folders/files are sufficient to run the code locally using the simple python server as described in the project spec. Since I (Gabriel) worked with coffeescript we separated the javascript into the two folders js and js-sebastian in order to make sure that no javascript files are accidentally overwritten by the coffeescript compiler.
 
@@ -27,15 +34,15 @@ After this the page is available at: http://localhost:8888
 
 The data was retrieved by scrapers. The scrapers can be found in the subfolder 'scrapers'. For information on how the scrapers work refer to the process book or directly to the code.
 
-The data for the map visualization is in external json files in the 'data' folder(thus the need for the simple python server). The data for the tweets is hardcoded in the js file tweets.js
+The data for the map visualization is in external json files in the 'data' folder(thus the need for the simple python server).
 
 **Code**
 
-index.html is the only HTML file containing all visualizations.
+index.html is the only HTML file containing all visualizations and the story.
 
 External libraries are placed in the folder 'js/vendor'
 
-All modules are namespaced under the name etna in order to only have one injection in the global namespace. The map.js file contains the basic map setup functionality through the etna.map.init method. eruptions.js contains the code to draw the barchart with the eruptions history and the brushing capability. d3layer.js contains the code to draw an svg layer with circles representing the plume area over the map. templates.js contains underscore templates that are used in various places.
+All modules are namespaced under the name etna in order to only have one injection in the global namespace. The map.js file contains the basic map setup functionality through the etna.map.init method. The towns.js file contains the code that generates the towns explorer in the right hand side of the visualization. vega-line-chart.js is a template for the line chart that is drawn on every towns detail page (the data is injected at runtime). eruptions.js contains the code to draw the barchart with the eruptions history and the brushing capability. d3layer.js contains the code to draw an svg layer with circles representing the plume area over the map. lavaLayer.js contains the code to draw an svg layer with paths for the lava flows at different eruptions. templates.js contains underscore templates that are used in various places.
 
 The folder js-sebastian contains the code for the twitter visualization. Tweets.js contains all tweets and sentiment.js the code for the visualization.
 

@@ -101,6 +101,19 @@
       event.preventDefault()
       @resetInitialState()
 
+    $("#map-regions").delegate ".toggle-legend", "click", (event) ->
+      event.preventDefault()
+      if $(".legend").is(':visible')
+        $elem = $(event.currentTarget)
+        $(".legend").hide()
+        $elem.children("i").removeClass("icon-minus-sign")
+        $elem.children("i").addClass("icon-plus-sign")
+      else
+        $elem = $(event.currentTarget)
+        $(".legend").show()
+        $elem.children("i").removeClass("icon-plus-sign")
+        $elem.children("i").addClass("icon-minus-sign")
+
 
   getMap: () ->
     @map
