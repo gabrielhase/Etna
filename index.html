@@ -362,7 +362,42 @@
         </ul>
         <h3>Project Title: «Mount Etna: Curse or Attraction?»</h3>
         <h3>The map visualization</h3>
-        <p>TODO: Text</p>
+        <p>The map visualization combines a lot of different data in one place. It actually consists of three parts:
+        </p>
+        <ul>
+          <li>The map itself that can be navigated freely.</li>
+          <li>The bar chart of all eruptions at the bottom of the map that can be toggled and can be used to make timeframe selections.</li>
+          <li>The towns explorer on the right hand side that can be used to get detailed information about the towns around Etna.</li>
+        </ul>
+        <p>The data encoded in the visualization is:</p>
+        <ul>
+          <li>Population Trends of towns: Each town is either green or red for growing or shrinking population respectively (overall or in the selected timeframe).</li>
+          <li>Total Population of towns: Each town icon on the map comes in one of three sizes (large: above 100000, medium: above 25000, small: under 25000). The size updates with the selected timeframe (end of the timeframe).</li>
+          <li>Volcanic Events: Upon selecting a timeframe the events from the volcano are shown by little pins on the map with popovers. The events include:
+            <ul>
+              <li>Ash falling on a town</li>
+              <li>Explosions at craters</li>
+              <li>Destruction of towns</li>
+              <li>Airport Shutdowns</li>
+              <li>Earthquakes triggered by an eruption</li>
+            </ul>
+          </li>
+          <li>
+            VEI of an eruption: This is indicated by a circle of respective size to the power of the explosion.
+          </li>
+          <li>
+            Lava Flows of an eruption: The lava flows are drawn in red on the map with popovers indicating the year they occured.
+          </li>
+          <li>Town Details: For each town there are details in the towns explorer (line chart showing the population trend in the 20th century, an image and descriptive text).
+          </li>
+        </ul>
+
+        <p>All three components interact with each other. The user can interact with the visualization by:</p>
+        <ul>
+          <li>Selecting a timeframe to see according events and population trends in the map.</li>
+          <li>Navigating the map to see more detail, e.g. zooming in to see where exactely a lava flow went through.</li>
+          <li>Clicking on towns icons on the map or selecting towns in the towns explorer to get detailed information about a town.</li>
+        </ul>
         <h3>Screencast</h3>
         TODO: Screencast
         <h3>Process Book</h3>
