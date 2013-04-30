@@ -41,11 +41,11 @@ this.etna.townsExplorer = (function() {
         populationTrend = "";
         populationDiff = feature.properties.endPopulation - feature.properties.startPopulation;
         if (populationDiff > 0) {
-          populationTrend = "<span class='badge badge-success'>" + populationDiff + "</span>";
+          populationTrend = "<span class='badge badge-success'><i class='icon-arrow-up'></i>&nbsp;" + populationDiff + "</span>";
         } else {
-          populationTrend = "<span class='badge badge-important'>" + populationDiff + "</span>";
+          populationTrend = "<span class='badge badge-important'><i class='icon-arrow-down'></i>&nbsp;" + populationDiff + "</span>";
         }
-        return html = "<div style=\"z-index: 1000\">\n<h2>" + feature.properties.town + "&nbsp;<small>" + populationTrend + "</small></h2>\n<table class='table table-striped'>\n  <thead>\n    <tr>\n      <th>Value</th>\n      <th>From</th>\n      <th>To</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Year</td>\n      <td>" + feature.properties.startYear + "</td>\n      <td>" + feature.properties.endYear + "</td>\n    </tr>\n    <tr>\n      <td>Population</td>\n      <td>" + feature.properties.startPopulation + "</td>\n      <td>" + feature.properties.endPopulation + "</td>\n    </tr>\n  </tbody>\n</table>\n</div>";
+        return html = "<div style=\"z-index: 1000\">\n<h2>" + feature.properties.town + "&nbsp;<small>" + populationTrend + "</small></h2>\n<table class='table table-striped'>\n  <thead>\n    <tr>\n      <th>Value</th>\n      <th>From</th>\n      <th>To</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Year</td>\n      <td><b>" + feature.properties.startYear + "</b></td>\n      <td><b>" + feature.properties.endYear + "</b></td>\n    </tr>\n    <tr>\n      <td>Population</td>\n      <td>" + feature.properties.startPopulation + "</td>\n      <td>" + feature.properties.endPopulation + "</td>\n    </tr>\n  </tbody>\n</table>\n</div>";
       });
     },
     addTownsToMap: function(timeWindow) {

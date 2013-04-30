@@ -34,19 +34,15 @@
         $(elem).parent('div').css("z-index", "10")
 
       elem
-      # img = document.createElement('img')
-      # img.className = 'marker-image'
-      # img.setAttribute('src', 'http://www.dummyimage.com/10x10/bd00bd/fff')
-      # img
     )
     @interaction = mapbox.markers.interaction(@townsLayer)
     @interaction.formatter( (feature) ->
       populationTrend = ""
       populationDiff = feature.properties.endPopulation - feature.properties.startPopulation
       if populationDiff > 0
-        populationTrend = "<span class='badge badge-success'>#{populationDiff}</span>"
+        populationTrend = "<span class='badge badge-success'><i class='icon-arrow-up'></i>&nbsp;#{populationDiff}</span>"
       else
-        populationTrend = "<span class='badge badge-important'>#{populationDiff}</span>"
+        populationTrend = "<span class='badge badge-important'><i class='icon-arrow-down'></i>&nbsp;#{populationDiff}</span>"
       html = """
       <div style="z-index: 1000">
       <h2>#{feature.properties.town}&nbsp;<small>#{populationTrend}</small></h2>
@@ -61,8 +57,8 @@
         <tbody>
           <tr>
             <td>Year</td>
-            <td>#{feature.properties.startYear}</td>
-            <td>#{feature.properties.endYear}</td>
+            <td><b>#{feature.properties.startYear}</b></td>
+            <td><b>#{feature.properties.endYear}</b></td>
           </tr>
           <tr>
             <td>Population</td>
