@@ -127,7 +127,7 @@ this.etna.townsExplorer = (function() {
       return this.drawTownsPopulationChart(region);
     },
     drawTownsPopulationChart: function(region) {
-      var data, population, regionData, year, _ref;
+      var data, population, regionData, viewInstance, year, _ref;
       regionData = etna.towns[region];
       data = {};
       data["table"] = [];
@@ -139,7 +139,7 @@ this.etna.townsExplorer = (function() {
           "population": population
         });
       }
-      return this.chartComponent({
+      return viewInstance = this.chartComponent({
         el: "#vis",
         data: data,
         renderer: "svg"

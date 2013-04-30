@@ -234,6 +234,10 @@
     barchartGroup.call(@brush.extent(lastExtent)) if lastExtent
 
 
+  getBrush: () =>
+    @brush.extent()
+
+
   eruptionsBrush: () =>
     # remember last extent for later
     lastExtent = @brush.extent()

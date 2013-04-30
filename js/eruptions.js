@@ -253,6 +253,9 @@ this.etna.eruptionsChart = (function() {
         return barchartGroup.call(_this.brush.extent(lastExtent));
       }
     },
+    getBrush: function() {
+      return _this.brush.extent();
+    },
     eruptionsBrush: function() {
       var dataFiltered, lavaFiltered;
       lastExtent = _this.brush.extent();

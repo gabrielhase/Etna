@@ -152,4 +152,32 @@
       data["table"].push
         "year": year
         "population": population
-    @chartComponent({el: "#vis", data: data, renderer: "svg"}).update()
+    viewInstance = @chartComponent({el: "#vis", data: data, renderer: "svg"}).update()
+    # highlight brush selected region
+    # => not possible in this way since Vega:
+    #     1. chooses its own extent (somewhere arount 1815 to 2025 -> not like the data)
+    #     2. the axes scale is not everywhere the same -> between 1900 and 1950 the extent is larger than between 1850 and 1900
+    # brushLimits = etna.eruptionsChart.getBrush()
+    # start = brushLimits[0].getFullYear()
+    # end = brushLimits[1].getFullYear()
+    # if start == end # don't do anything for single year
+    #   console.log "years are equal"
+    #   return
+    # else
+    #   start = brushLimits[0].getFullYear()
+    #   end = brushLimits[1].getFullYear()
+    #   $container = $("#vis .vega svg")
+    #   height = $container.height() - 5 - 20
+    #   pixelPerYear = (2025-1815) / $container.width()
+    #   left = (start - 1815) * pixelPerYear + viewInstance._padding.left
+    #   el = $("""
+    #     <div style="position:absolute; left: #{left}px; top: 0; border: 1px solid #000; height: #{height}px">
+    #       bla
+    #     </div>
+    #   """)
+    #   console.log $("#vis .vega")
+    #   $("#vis .vega").append(el)
+    #   console.log "start #{start}, end #{end}"
+
+
+
