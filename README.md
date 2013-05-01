@@ -8,17 +8,19 @@ All code is Open-Source an available on: https://github.com/gabrielhase/Etna
 
 The relevant code for the grading are in the folders:
   - js
-  - js-sebastian
   - data
   - css
   - img
   - etna-screencast.m4v
   - index.html
   - scrapers
+  - sebastian
 
-These folders/files are sufficient to run the code locally using the simple python server as described in the project spec. Since I (Gabriel) worked with coffeescript we separated the javascript into the two folders js and js-sebastian in order to make sure that no javascript files are accidentally overwritten by the coffeescript compiler.
 
-The whole map part of the visualization is written in coffeescript. If you want to see the respective source refer to the folder "coffee". At the end of this readme I am describing my pipeline setup for coffeescript development with Guard. This is of course optional, you can use whatever compilation method  you like.
+These folders/files are sufficient to run the code locally using the simple python server as described in the project spec.
+Sebastian was working on a tripadvisor map application, but couldn't get it to a form that would have made sense within the story in time for the due date. So we decided to leave this visualization out of the story. For completeness the code is still submitted in the folder "sebastian".
+
+The whole visualization is written in coffeescript. If you want to see the respective source refer to the folder "coffee". At the end of this readme I am describing my pipeline setup for coffeescript development with Guard. This is of course optional, you can use whatever compilation method  you like.
 
 **Running**
 
@@ -43,8 +45,6 @@ index.html is the only HTML file containing all visualizations and the story.
 External libraries are placed in the folder 'js/vendor'
 
 All modules are namespaced under the name etna in order to only have one injection in the global namespace. The map.js file contains the basic map setup functionality through the etna.map.init method. The towns.js file contains the code that generates the towns explorer in the right hand side of the visualization. vega-line-chart.js is a template for the line chart that is drawn on every towns detail page (the data is injected at runtime). eruptions.js contains the code to draw the barchart with the eruptions history and the brushing capability. d3layer.js contains the code to draw an svg layer with circles representing the plume area over the map. lavaLayer.js contains the code to draw an svg layer with paths for the lava flows at different eruptions. templates.js contains underscore templates that are used in various places.
-
-The folder js-sebastian contains the code for the twitter visualization. Tweets.js contains all tweets and sentiment.js the code for the visualization.
 
 **Citation**
 
